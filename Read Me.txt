@@ -1,0 +1,305 @@
+prepaid management system
+
+Part 0
+
+Reference:
+Transaction refers to allocating cloth from a purcchase to a batch
+ClothPayment refers to making payments on a cloth purchase
+
+
+Color coding:
+	Make sure that when objects are posted, the manual input fields are a different collor from automatic fields
+
+
+
+Sheet structure
+10 tabs:
+	one for each of the main objects object
+		*Purchase
+		*Batch
+		*Transaction
+	*Log - to record every time product is move  in a transaction. If a pool transaction moves cloth from three purchases to
+		complete a batch, the log will record each of those allocations including price quantity origin and destination
+	Payments
+		*cloth payment
+		*Production Payment
+		*Shipping payment
+	Data visualization
+		*Dashboard
+		*Batch Analysis
+	*Edit Data
+		Used for adding
+				purchase
+				batch
+				transaction
+				cloth payment
+				production payment
+				shipping payment
+		Process payments buttons
+			purchase
+			shipping
+			production
+		process transactions button
+		Reset data button
+
+
+
+
+
+Part 1 : cloth allocation and structuture
+
+Purchase
+	Properties
+		purchaseId: P000000
+		date :manual input
+		PurchasedCloths:manual input
+		AllocatedPurchase (quantity of cloths already allocated)  :script
+		available cloths: if(paidFor = true){ purchased - allocated} else{ 0 }
+		paidFor (switch: 1(amountpaid = price){true}; 2(amountpaid < price && amountpaid >= 0 ){false}; 3(amountpaid <0 {error 					3 : negative amount paid Purchase ID: Pxxxx})
+		amountPaid :script
+		price: manual input
+		price per unit: cloths/price
+		PaymentsIds []
+		Payments amounts[]
+
+
+Batch
+	Properties
+		batchId: B00000
+		date
+		quantity of cloths requested
+		alloacatedClothBatch (quantity allocated to batch)
+		BatchClothCost(cloths cost): script
+		BatchClothCostUnit (cloth cost per unit): allocatedClothCost/allocatedClothBatch
+
+		ClothsIds []
+		ClothsQuantities[]
+		clothsCosts[]
+		ClothsCostUnit[]
+		ShippingPaid: Script
+		ShippingIDs[]
+		ShippingAmounts[]
+		ProductionPaid : script
+		ProductionIDs []
+		production amounts[]
+		HasLanded: manual input
+
+
+Transaction (allocates cloth to batch)
+	Properties
+		TransactionId: T00000
+		date
+		TransactionQuantity
+		Purchase (can specify batch, or "pool" which will take from the oldest available purchase)
+		Batch
+		HasBeenProcessed(boolean, default = false)
+	Methods
+		process transaction{
+			function Allocate(quantiyFromThisPurchase) ={
+
+				add quantiyFromThisPurchase to quantity PurchaseAllocated
+				add quantiyFromThisPurchase to quantity alloacatedClothBatch 
+				AddedCost = quantiyFromThisPurchase* cost/unit(purchase)
+				BatchClothCost = BatchClothCost + AddedCost
+				transaction.id push to Batch.ClothsIds
+				quantiyFromThisPurchase push to Batch.ClothsQuantities
+				AddedClothCost push to Batch.ClothsCosts
+				cost/unit(purchase) push to Batch.ClothsCostsUnit
+
+
+				New log entry 
+				}
+
+
+			If origin =! "pool"{ //in this case we we are choosing which purchase we use as origin
+				
+
+				if (origin available < TransactionQuantity) 
+					{throw error = "error 1: origin does not have enough Origin Id Pxxxx batch Id Bxxxx transaction Id Txxxxx"}  //If the origgin doesn't have enough cloth
+
+				let quantiyFromThisPurchase = TransactionQuantity
+
+				Allocate (quantiyFromThisPurchase) //we alllocate the cloths
+
+				HasBeenProcessed = true
+				
+			}else{ //if we are taking from cloth from the loop, the are three cases
+
+				loop through the purchases from older to newer
+
+						switch
+							1) (available >= TransactionQuantity)   //the purchase has enough to fullfill transaction
+
+								let quantiyFromThisPurchase = TransactionQuantity
+
+								Allocate (quantiyFromThisPurchase) //we alllocate the cloths
+
+							2) (available < TransactionQuantity && available > 0) //the puchase has availability but not enough
+
+								let quantiyFromThisPurchase = available // we take all we can
+
+								TransactionQuantity = TransactionQuantity - available   //we reduce the request by the amount we got
+
+								Allocate (quantiyFromThisPurchase) //we alllocate the cloths
+
+								iterate loop // we find another purchase to get the remaining cloth
+
+
+							3)	(available = 0) //this purchase has allready been fully allocated
+
+								Iterate loop
+
+							4) (available <0) 
+
+							Throw error = "error 2: negative availability on purchase id Pxxxxxx"
+
+
+				}
+
+			change HasBeenProcessed to true
+			New log entry
+
+			} //end of method process transaction
+
+Log Entry
+	LogEntryId: L00000000 (needs lots of zeros because might get in the hundreds, maybe thousands)
+	Date (of transaction)
+	Origin (purchaseId)
+	destination (batchId)
+
+
+Callable functions(with buttons on dashboard):
+
+	Function: ProcessTransactions
+		gets all objects except ClothPayments
+		process all unprocessed transactions
+		Posts results
+
+	Function ProcessClothPayments
+		get objects
+			ClothPayments
+			Purchases 
+		process all unprocessed ClothPayments
+		Posts results
+
+
+	Function: reset data
+
+		gets all objectes
+
+		Edit Objects
+			Transactions
+				HasBeenProcessed = false on all transactions
+			Batches
+				alloacatedClothBatch = 0 on all batches
+				BatchClothCost  = 0 on all btaches	
+				BatchClothCost(cloths cost): 0
+				BatchClothCostUnit= 0
+				ClothsIds []
+				ClothsQuantities []
+				clothsCosts []
+				ClothsCostUnit[]
+				ShippingPaid: 0
+				ShippingIDs[]
+				ShippingAmounts[]
+				ProductionPaid : 0
+				ProductionIDs []
+				production amounts[]
+
+			Purchases
+				AllocatedPurchase
+				AmountPaid
+				PaymentsIds []
+				Payments amounts[]
+
+			Logs
+				delete all logs
+
+			ClothPayment
+				HasBeenProcessed = false on all payments
+			SHippingPayment
+				HasBeenProcessed = false on all payments
+			ProductionPayment
+				HasBeenProcessed = false on all payments
+
+
+
+
+
+
+
+
+Part 2: cloth payment
+
+
+object
+
+ClothPayment (allocates cloth to batch)
+	Properties
+		ClothPaymentId: C00000
+		date
+		paymentAmount
+		Purchase(which purchase is being paid): 
+		HasBeenProcessed(boolean, default = false)
+	Methods
+		process ClothPaymnet{
+			adds paymentAmount to Purchase.amountPaid
+			if amountPaid(after adding) > Price {throw error "Overpaid Clothpayment id Cxxxxx Purchase id Pxxxxx"}
+			Payment.id push to Purchase.PaymentsId
+			payment amount push to Purchase.PaymentsAmounts
+			HasBeenProcessed = true
+
+		}
+
+
+part 3: Shipping and manufacturing
+
+
+
+
+Part 4 visualization
+
+
+	Dashboard
+		Pipeline
+			Barchart with number of cloths
+				unpaid
+				available
+				alloacated to open batchs
+				Landed
+	Batch description
+		posts each batch as a row, followed by a few more rows as follows:
+			(header1) ClothPurchase Id; cloth purchase quantity; clothCosts; ClothcostUnit
+						Pxxxxx,  YYYYY, $$$$$$$, $$$$
+			same thing for production
+			same thing for shipment
+		To make loop accomodate all rows:
+			i=0
+			ArrayToPrint =[]
+			PrintRow = 0
+
+			 loop thorugh batches
+			 	arrayToPrint[PrintRow] = batchArray[i]
+			 	PrintRow ++
+
+			 	batchArray[i].(choose a property)
+			 		at a new property print header to arrayToPrint[PrintRow]
+
+			 		PrintRow ++ 
+
+			 		loop to the values on this property (it is an array)
+			 			k=0
+			 			arrayToPrint[PrintRow] batchArray[i].(the property)[k]
+			 			PritRow++
+
+		print arrayToPrint to the
+
+			 				
+			 		
+
+
+part 5
+	Create Edit Data funtions as listed above of the sheet description o Part 0
+
+
+
