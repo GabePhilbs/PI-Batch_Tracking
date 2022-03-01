@@ -76,12 +76,19 @@ Batch
 		ClothsQuantities[]
 		clothsCosts[]
 		ClothsCostUnit[]
-		ShippingPaid: Script
-		ShippingIDs[]
-		ShippingAmounts[]
+
 		ProductionPaid : script
+		ProductionPaidUnit = ProductionPaid/allocatedClothBatch
 		ProductionIDs []
 		production amounts[]
+
+		ShippingPaid: Script
+		ShippingPaidUnit = ShippingPaid/allocatedClothBatch
+		ShippingIDs[]
+		ShippingAmounts[]
+
+		TotalCost = ProductionPaid + ShippingPaid + BatchClothCost
+		totalCostUnit =TotalCost /allocatedClothBatch
 		HasLanded: manual input
 
 
