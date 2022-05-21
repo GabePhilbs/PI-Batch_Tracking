@@ -1,0 +1,5 @@
+
+When importing:
+
+define group and type automatically, based on the table it was imported from
+

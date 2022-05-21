@@ -1,0 +1,7 @@
+
+1- Group b should not have initial balance columns since they are 
+    destination accounts and all balance comes from transfers   
+2- This also means that the "transfers" column is useless, since its 
+    amount will always be equa;l to "current balance"
+3- Refund should also have cloth quantities, since the amount
+     of cloths available can be reduced by a refund.
