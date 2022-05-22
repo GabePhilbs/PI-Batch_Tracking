@@ -1,5 +1,13 @@
 prepaid management system
 
+
+
+!!!!!
+ This document is DEPRECATED and must be updated to reflect changes on the Readme tab on the spreadsheet
+!!!!!!
+
+
+
 Part 0
 
 Reference:
@@ -48,9 +56,14 @@ Sheet structure
 
 Part 1 : cloth allocation and structuture
 
+ID format (1-to-7)000000 (number for type) (6 digit number in incemental sequence in order the entry was created
+)
+
+**NO letters in Id, so I can do mathematical comparisons if needed, like to find which one is newer.
+
 Purchase
 	Properties
-		purchaseId: P000000
+		purchaseId: (1-to-3)000000
 		date :manual input
 		PurchasedCloths:manual input
 		AllocatedPurchase (quantity of cloths already allocated)  :script
@@ -65,7 +78,7 @@ Purchase
 
 Batch
 	Properties
-		batchId: B00000
+		batchId: 5000000
 		date
 		quantity of cloths requested
 		alloacatedClothBatch (quantity allocated to batch)
@@ -94,7 +107,7 @@ Batch
 
 Transaction (allocates cloth to batch)
 	Properties
-		TransactionId: T00000
+		TransactionId: 
 		date
 		TransactionQuantity
 		Purchase (can specify batch, or "pool" which will take from the oldest available purchase)
