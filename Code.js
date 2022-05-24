@@ -184,7 +184,7 @@ class C6 extends CTransactions{
 }
 
 // C7 Landing
-class C7Input extends CTransactions{
+class C7 extends CTransactions{
     constructor(ID,ExID,Date,BatchID, DateLanded, QuantityLanded){
         super(ID,ExID,Date)
         this.Type = 7;
@@ -202,3 +202,74 @@ class C7Input extends CTransactions{
     }
     
 }
+
+
+//object arrays
+var A1Array =[];
+var A2Array =[];
+var A3Array =[];
+var B4Array =[];
+var B5Array =[];
+var C6Array =[];
+var C7Array =[];
+
+
+
+//////// testing stuff
+
+//////// testing stuff
+
+var batchIDFromSheet = 5000001;
+var batchIDFromSheet2 = 5000002;
+
+//var firstBatch = new B5(batchIDFromSheet,"AC105","","12/05/2022","");
+
+
+function mainFunction(){
+  B5Array[0]= new B5(batchIDFromSheet,"AC105","","12/05/2022","");
+  B5Array[1]= new B5(batchIDFromSheet2,"AC105","","12/05/2022","");
+
+  console.log(B5Array[0]);
+  console.log(B5Array[1]);
+
+
+
+  manipulateObject(5000002, 2, B5Array,1,20)
+
+
+
+  console.log(B5Array[0]);
+  console.log(B5Array[1]);
+
+
+  
+}
+
+
+
+/// transfer  will have two methods: increaseDestination and decreaseOrigin
+function increaseDestination (objID, increase, targetArray, OriginType, clothIncrease){
+  let index = targetArray.findIndex(x => x.ID === objID)
+  targetArray[index].Balance = targetArray[index].Balance + increase;
+
+  if(OriginType = 1){
+    targetArray[index].ClothBalance = targetArray[index].ClothBalance + clothIncrease;
+
+  }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
