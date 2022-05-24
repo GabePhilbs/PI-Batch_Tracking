@@ -158,3 +158,47 @@ class B5 extends BDestinationAccounts{
 
 
 // C group child classes
+
+
+// C6 transfer
+class C6 extends CTransactions{
+    constructor(ID,ExID,Date,OriginGroup,OriginType,OriginID,DestinationGroup,DestinationType,DestinationID, Amount, Cloths ){
+        super(ID,ExID,Date)
+        this.Type = 6;
+
+        this.OriginGroup =OriginGroup;
+        this.OriginType =OriginType;
+        this.OriginID = OriginID;
+        this.DestinationGroup = DestinationGroup;
+        this.DestinationType = DestinationType;
+        this.DestinationID = DestinationID;
+        this.Amount = Amount;
+        this.Cloths = Cloths;
+       
+    }
+
+    executeTransfer(){
+
+    }
+    
+}
+
+// C7 Landing
+class C7Input extends CTransactions{
+    constructor(ID,ExID,Date,BatchID, DateLanded, QuantityLanded){
+        super(ID,ExID,Date)
+        this.Type = 7;
+
+        this.BatchID = BatchID;
+        this.DateLanded = DateLanded;
+        this.QuantityLanded =QuantityLanded
+
+
+       
+    }
+
+    executeLanding(){
+
+    }
+    
+}
