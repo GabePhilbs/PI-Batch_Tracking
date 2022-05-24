@@ -234,7 +234,7 @@ function mainFunction(){
 
 
 
-  manipulateObject(5000002, 2, B5Array,1,20)
+  increaseDestination(5000002, 2, B5Array,1,20)
 
 
 
@@ -248,28 +248,29 @@ function mainFunction(){
 
 
 /// transfer  will have two methods: increaseDestination and decreaseOrigin
-function increaseDestination (objID, increase, targetArray, OriginType, clothIncrease){
-  let index = targetArray.findIndex(x => x.ID === objID)
-  targetArray[index].Balance = targetArray[index].Balance + increase;
-
-  if(OriginType = 1){
-    targetArray[index].ClothBalance = targetArray[index].ClothBalance + clothIncrease;
-
+function increaseDestination(objID, increase, targetArray, OriginType, clothIncrease){
+    let index = targetArray.findIndex(x => x.ID === objID)
+    targetArray[index].Balance = targetArray[index].Balance + increase;
+  
+    if(OriginType = 1){
+      targetArray[index].Cloths = targetArray[index].Cloths + clothIncrease;
+  
+    }
+  
+  
   }
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
