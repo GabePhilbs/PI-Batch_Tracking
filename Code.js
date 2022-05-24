@@ -252,7 +252,7 @@ function increaseDestination(objID, increase, targetArray, OriginType, clothIncr
     let index = targetArray.findIndex(x => x.ID === objID)
     targetArray[index].Balance = targetArray[index].Balance + increase;
   
-    if(OriginType = 1){
+    if(clothIncrease != 0){
       targetArray[index].Cloths = targetArray[index].Cloths + clothIncrease;
   
     }
