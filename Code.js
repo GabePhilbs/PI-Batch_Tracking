@@ -40,6 +40,7 @@ class AsourceAccounts{
 
     }
     UpdateBalance(){
+        this.Balance = this.InitialBalance - this.Transfers;
 
     }
 
@@ -96,6 +97,8 @@ class A1 extends AsourceAccounts{
 
     UpdateCloth(){
 
+        this.ClothBalance = this.Initialcloths - this.ClothTransfers;
+
     }
 }
 
@@ -123,12 +126,32 @@ class A3 extends AsourceAccounts{
 
 // B group child classes
 
-// B4 production deposits
+// B4 refunds
 class B4 extends BDestinationAccounts{
-    constructor(ID,ExID1,ExID2,Date, Description){
+    constructor(ID,ExID1,ExID2,Date, Description,BankAccount){
         super(ID,ExID1,ExID2,Date, Description)
         this.Type = 4;
-       
+        this.BankAccount= BankAccount; //bankaccount should be the QBO number without the dash
+    } 
+    
+}
+
+// B5 batch
+class B5 extends BDestinationAccounts{
+    constructor(ID,ExID1,ExID2,Date, Description){
+        super(ID,ExID1,ExID2,Date, Description)
+        this.Type = 5;
+        this.Landed = 0;
+        this.LandedDate= "";
+        this.LandedQuantity = 0;
+        this.Cost= 0;
+    } 
+
+    UpdateCost(){
+        if(this.Landed = 1){
+            this.cost = this.Balance/ this.LandedQuantity;
+
+        }
     }
     
 }
