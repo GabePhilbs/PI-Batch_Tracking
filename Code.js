@@ -148,7 +148,7 @@ class B5 extends BDestinationAccounts{
     } 
 
     UpdateCost(){
-        if(this.Landed = 1){
+        if(this.Landed == 1){
             this.cost = this.Balance/ this.LandedQuantity;
 
         }
@@ -217,8 +217,6 @@ var C7Array =[];
 
 //////// testing stuff
 
-//////// testing stuff
-
 var batchIDFromSheet = 5000001;
 var batchIDFromSheet2 = 5000002;
 
@@ -234,7 +232,7 @@ function mainFunction(){
 
 
 
-  increaseDestination(5000002, 2, B5Array,1,20)
+  increaseDestination(5000002, 2,20, B5Array, "B",5)
 
 
 
@@ -248,29 +246,30 @@ function mainFunction(){
 
 
 /// transfer  will have two methods: increaseDestination and decreaseOrigin
-function increaseDestination(objID, increase, targetArray, OriginType, clothIncrease){
-    let index = targetArray.findIndex(x => x.ID === objID)
-    targetArray[index].Balance = targetArray[index].Balance + increase;
-  
-    if(clothIncrease != 0){
-      targetArray[index].Cloths = targetArray[index].Cloths + clothIncrease;
-  
-    }
-  
-  
+function increaseDestination (objID, increase, clothIncrease, targetArray, destinationGroup, destinationType){
+  let index = targetArray.findIndex(x => x.ID === objID)
+  targetArray[index].Balance = targetArray[index].Balance + increase;
+
+  if(clothIncrease != 0){
+    targetArray[index].Cloths = targetArray[index].Cloths + clothIncrease;
+    if(destinationType == 1 ){ targetArray[index].UpdateCloth()}
+
   }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  if(destinationGroup == "A"){ targetArray[index].UpdateBalance()}
+  if(destinationType == 5){ targetArray[index].UpdateCost()}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
