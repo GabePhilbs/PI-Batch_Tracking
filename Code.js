@@ -231,7 +231,7 @@ class C6 extends CTransactions{
 
 
 
-
+        
 
         }else if(this.DestinationGroup = "A"){ //if the destination is in group A, it only has one type of balance
 
@@ -272,7 +272,7 @@ class C6 extends CTransactions{
             targetArray[index].Transfers = targetArray[index].Transfers - this.Amount;
         
             if(this.Cloths != 0){
-            targetArray[index].Cloths = targetArray[index].ClothTransfers + this.Cloths;
+            targetArray[index].Cloths = targetArray[index].ClothTransfers - this.Cloths;
             targetArray[index].UpdateCloth()
         
             }
