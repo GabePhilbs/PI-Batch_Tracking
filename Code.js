@@ -47,7 +47,7 @@ class AsourceAccounts{
 
     }
     UpdateBalance(){
-        this.Balance = this.InitialBalance + this.Transfers;
+        this.CurrentBalance = this.InitialBalance + this.Transfers;
 
     }
 
@@ -74,11 +74,7 @@ class BDestinationAccounts{
           UpdateBalance(){
               this.Balance = this.ClothPaid + this.ProductionPaid + this.ShippingPaid;
           }
-          UpdateCloth(){
-
-            this.ClothBalance = this.Initialcloths - this.ClothTransfers;
-    
-        }
+          
     
 }
 
@@ -110,12 +106,12 @@ class A1 extends AsourceAccounts{
         this.Type = 1;
         this.Initialcloths = Initialcloths;
         this.ClothTransfers = 0;
-        this.ClothBalance=  Initialcloths;
+        this.ClothBalance =  Initialcloths;
     }
 
     UpdateCloth(){
 
-        this.ClothBalance = this.Initialcloths - this.ClothTransfers;
+        this.ClothBalance = this.Initialcloths + this.ClothTransfers;
 
     }
 }
@@ -246,7 +242,7 @@ class C6 extends CTransactions{
             targetArray[index].Transfers = targetArray[index].Transfers + this.Amount;
         
             if(this.Cloths != 0){
-            targetArray[index].Cloths = targetArray[index].ClothTransfers + this.Cloths;
+            targetArray[index].ClothTransfers = targetArray[index].ClothTransfers + this.Cloths;
             targetArray[index].UpdateCloth()
         
             }
@@ -279,7 +275,7 @@ class C6 extends CTransactions{
             targetArray[index].Transfers = targetArray[index].Transfers - this.Amount;
         
             if(this.Cloths != 0){
-            targetArray[index].Cloths = targetArray[index].ClothTransfers - this.Cloths;
+            targetArray[index].ClothTransfers = targetArray[index].ClothTransfers - this.Cloths;
             targetArray[index].UpdateCloth()
         
             }
