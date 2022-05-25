@@ -201,29 +201,12 @@ class C6 extends CTransactions{
            case 3: targetArray = A3Array; break;
            case 4: targetArray = B4Array; break;
            case 5: targetArray = B5Array; break;
-           case 6: targetArray = C6Array; break;
-           case 7: targetArray = C7Array; break;
+           default: console.log("error on transaction id" + this.ID + "invalid destination type" + this.DestinationType); break;
 
         }
 
-        //old code does not differentiate between different types of balances
-        // let index = targetArray.findIndex(x => x.ID === this.DestinationID)
+       
 
-        //     targetArray[index].Balance = targetArray[index].Balance + this.Amount;
-        
-        //     if(this.ClothsclothIncrease != 0){
-        //     targetArray[index].Cloths = targetArray[index].Cloths + this.Cloths;
-        //     if(this.DestinationType == 1 ){ targetArray[index].UpdateCloth()}
-        
-        //     }
-        //     if(this.DestinationGroup == "A"){ targetArray[index].UpdateBalance()}
-        //     if(this.DestinationType == 5){ targetArray[index].UpdateCost()}
-
-            
-
-
-
-            //new code, still working on it
         if(this.DestinationGroup = "B"){ //group B will have 3 types of balances
 
             //selecting which balance will increase
@@ -263,14 +246,46 @@ class C6 extends CTransactions{
             targetArray[index].UpdateBalance()
             
 
-        }else{console.log( this.ID + "transaction has invalid destination group" + this.destinationGroup)}
+        }else{console.log( this.ID + "transaction has invalid destination group" + this.DestinationGroup)}
       }
+
+
 
       decreaseOrigin(){
 
-      }
-    
+        var targetArray="";
+
+        switch(this.OriginType){ //based on type we decide which array to access
+            //object arrays
+           case 1: targetArray = A1Array; break;
+           case 2: targetArray = A2Array; break;
+           case 3: targetArray = A3Array; break;
+           default: console.log("error on transaction id" + this.ID + "invalid origin type" + this.OriginType); break;
+
+        }
+
+
+         if(this.OriginGroup = "A"){ //origin always has to be A
+
+            let index = targetArray.findIndex(x => x.ID === this.OriginID)
+            targetArray[index].Transfers = targetArray[index].Transfers - this.Amount;
+        
+            if(this.ClothsclothIncrease != 0){
+            targetArray[index].Cloths = targetArray[index].ClothTransfers + this.Cloths;
+            targetArray[index].UpdateCloth()
+        
+            }
+            targetArray[index].UpdateBalance()
+            
+
+        }else{console.log( this.ID + "transaction has invalid origin group" + this.OriginGroup)}
+    }
+
+
+
 }
+    
+
 
 // C7 Landing
 class C7 extends CTransactions{
@@ -327,8 +342,6 @@ function mainFunction(){
   someTransferA2.increaseDestination();
   someTransferA1.increaseDestination();
 
-
-  //increaseDestination(5000002, 2,20, B5Array, "B",5)
 
 
 
