@@ -103,9 +103,9 @@ class A1 extends AsourceAccounts{
     constructor(ID,ExID1,ExID2,Date, Description, InitialBalance, Payee, BankAccount,Initialcloths){
         super(ID,ExID1,ExID2,Date, Description, InitialBalance, Payee, BankAccount)
         this.Type = 1;
-        this.Initialcloths =Initialcloths;
-        this.ClothTransfers =0;
-        this.ClothBalance= 0;
+        this.Initialcloths = Initialcloths;
+        this.ClothTransfers = 0;
+        this.ClothBalance=  Initialcloths;
     }
 
     UpdateCloth(){
@@ -256,7 +256,8 @@ class C6 extends CTransactions{
         var targetArray="";
 
         switch(this.OriginType){ //based on type we decide which array to access
-            //object arrays
+
+        //object arrays
            case 1: targetArray = A1Array; break;
            case 2: targetArray = A2Array; break;
            case 3: targetArray = A3Array; break;
@@ -321,37 +322,42 @@ var batchIDFromSheet2 = 5000002;
 
 
 function mainFunction(){
-  B5Array[0]= new B5(batchIDFromSheet,"AC105","","12/05/2022","");
-  B5Array[1]= new B5(batchIDFromSheet2,"AC105","","12/05/2022","");
-
-  console.log(B5Array[0]);
-  console.log(B5Array[1]);
-
-
-  A2Array[0] = new A2(2000001,"","","","",500,"","")
-  A2Array[1] = new A2(2000002,"","","","",400,"","")
-
-
-  A1Array[0] = new A1(1000001,"","","","",1000,"","",500)
-  A1Array[1] = new A1(1000002,"","","","",2000,"","",1000)
+  
+    A1Array[0] = new A1(1000001,"","","","",1000,"","",500)
+    A1Array[1] = new A1(1000002,"","","","",2000,"","",1000)
+    
+    A2Array[0] = new A2(2000001,"","","","",500,"","")
+    A2Array[1] = new A2(2000002,"","","","",400,"","")
+    
+    B5Array[0]= new B5(batchIDFromSheet,"AC105","","12/05/2022","");
+    B5Array[1]= new B5(batchIDFromSheet2,"AC105","","12/05/2022","");
+    
+    C6Array[0] = new C6(6000001,"","","A",2,2000001,"B",5,5000001,100,0);
+    C6Array[1] = new C6(6000001,"","","A",1,1000002,"B",5,5000002,500,250);
   
   
-  someTransferA2 = new C6(6000001,"","","A",2,2000001,"B",5,5000002,100,0);
-  someTransferA1 = new C6(6000001,"","","A",1,1000002,"B",5,5000002,500,250);
-
-  someTransferA2.increaseDestination();
-  someTransferA1.increaseDestination();
-
-
-
-
-  console.log(B5Array[0]);
-  console.log(B5Array[1]);
-
-
   
-}
-
+    
+    console.log(A1Array);
+    console.log(A2Array);
+    console.log(B5Array);
+    console.log(C6Array);
+  
+  
+    C6Array[0].increaseDestination
+    C6Array[0].decreaseOrigin
+    C6Array[1].increaseDestination
+    C6Array[1].decreaseOrigin
+  
+  
+  
+  
+    console.log(A1Array);
+    console.log(A2Array);
+    console.log(B5Array);
+    console.log(C6Array);
+    
+  }
 
 
 
