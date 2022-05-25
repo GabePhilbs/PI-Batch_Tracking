@@ -1,0 +1,6 @@
+
+Make sure to handle errors if:
+
+you are taking/adding cloths to/from accounts that don't have a Cloths property
+
+if a transaction has an origin from a group different than Barchart

@@ -207,54 +207,61 @@ class C6 extends CTransactions{
         }
 
         //old code does not differentiate between different types of balances
-        let index = targetArray.findIndex(x => x.ID === this.DestinationID)
+        // let index = targetArray.findIndex(x => x.ID === this.DestinationID)
 
-            targetArray[index].Balance = targetArray[index].Balance + this.Amount;
+        //     targetArray[index].Balance = targetArray[index].Balance + this.Amount;
         
-            if(this.ClothsclothIncrease != 0){
-            targetArray[index].Cloths = targetArray[index].Cloths + this.Cloths;
-            if(this.DestinationType == 1 ){ targetArray[index].UpdateCloth()}
+        //     if(this.ClothsclothIncrease != 0){
+        //     targetArray[index].Cloths = targetArray[index].Cloths + this.Cloths;
+        //     if(this.DestinationType == 1 ){ targetArray[index].UpdateCloth()}
         
-            }
-            if(this.DestinationGroup == "A"){ targetArray[index].UpdateBalance()}
-            if(this.DestinationType == 5){ targetArray[index].UpdateCost()}
+        //     }
+        //     if(this.DestinationGroup == "A"){ targetArray[index].UpdateBalance()}
+        //     if(this.DestinationType == 5){ targetArray[index].UpdateCost()}
 
             
 
 
 
             //new code, still working on it
-        // if(this.DestinationGroup = "B"){ //group B will have 3 types of balances
+        if(this.DestinationGroup = "B"){ //group B will have 3 types of balances
 
-        //     let index = targetArray.findIndex(x => x.ID === this.DestinationID)
-        //     targetArray[index].balance = targetArray[index].Balance + this.Amount;
+            //selecting which balance will increase
+            let toIncrease = "";
+            switch(this.OriginType){case 1: "ClothPaid"; break; case 2: "ProductionPaid"; break; case 3: "ShippingPaid" ; break;}
+
+
+            //find and increase the acount
+            let index = targetArray.findIndex(x => x.ID === this.DestinationID)
+            targetArray[index][toIncrease] = targetArray[index][toIncrease]+ this.Amount;
         
-        //     if(this.ClothsclothIncrease != 0){
-        //     targetArray[index].Cloths = targetArray[index].Cloths + this.Cloths;
-        //     if(this.DestinationType == 1 ){ targetArray[index].UpdateCloth()}
+            if(this.ClothsclothIncrease != 0){
+            targetArray[index].Cloths = targetArray[index].Cloths + this.Cloths;
+            if(this.DestinationType == 1 ){ targetArray[index].UpdateCloth()}
         
-        //     }
-        //     if(this.DestinationGroup == "A"){ targetArray[index].UpdateBalance()}
-        //     if(this.DestinationType == 5){ targetArray[index].UpdateCost()}
+            }
+            targetArray[index].UpdateBalance();
+
+            if(this.DestinationType == 5){ targetArray[index].UpdateCost()}
 
 
 
 
 
-        // }else if(this.DestinationGroup = "A"){ //if the destination is in group A, it only has one type of balance
+        }else if(this.DestinationGroup = "A"){ //if the destination is in group A, it only has one type of balance
 
-        //     let index = targetArray.findIndex(x => x.ID === this.DestinationID)
-        //     targetArray[index].balance = targetArray[index].Balance + this.Amount;
+            let index = targetArray.findIndex(x => x.ID === this.DestinationID)
+            targetArray[index].Transfers = targetArray[index].Transfers + this.Amount;
         
-        //     if(this.ClothsclothIncrease != 0){
-        //     targetArray[index].Cloths = targetArray[index].Cloths + this.Cloths;
-        //     if(this.DestinationType == 1 ){ targetArray[index].UpdateCloth()}
+            if(this.ClothsclothIncrease != 0){
+            targetArray[index].Cloths = targetArray[index].ClothTransfers + this.Cloths;
+            targetArray[index].UpdateCloth()
         
-        //     }
-        //     if(this.DestinationGroup == "A"){ targetArray[index].UpdateBalance()}
-        //     if(this.DestinationType == 5){ targetArray[index].UpdateCost()}
+            }
+            targetArray[index].UpdateBalance()
+            
 
-        // }else{console.log( this.ID + "transaction has invalid destination group" + this.destinationGroup)}
+        }else{console.log( this.ID + "transaction has invalid destination group" + this.destinationGroup)}
       }
 
       decreaseOrigin(){
