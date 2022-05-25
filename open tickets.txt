@@ -1,5 +1,4 @@
-in the test run, the execute transfer works on 2 cases  ut not on a third case
-it works on a 4th case, so wth?
 
 
-executeLanding seems to be doing nothing at all
+executeLanding does not update the cost
+

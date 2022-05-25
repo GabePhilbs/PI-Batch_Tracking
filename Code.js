@@ -294,12 +294,11 @@ class C6 extends CTransactions{
 
 // C7 Landing
 class C7 extends CTransactions{
-    constructor(ID,ExID,Date,BatchID, DateLanded, QuantityLanded){
+    constructor(ID,ExID,Date,BatchID, QuantityLanded){
         super(ID,ExID,Date)
         this.Type = 7;
 
         this.BatchID = BatchID;
-        this.DateLanded = DateLanded;
         this.QuantityLanded =QuantityLanded
 
 
@@ -317,7 +316,7 @@ class C7 extends CTransactions{
 
             B5Array[index].Landed = 1;
             B5Array[index].LandedQuantity = this.QuantityLanded;
-            B5Array[index].LandedDate = this.DateLanded;
+            B5Array[index].LandedDate = this.Date;
             B5Array[index].UpdateCost;
 
         }
@@ -354,9 +353,10 @@ function mainFunction(){
     
     C6Array[0] = new C6(6000001,"","","A",2,2000001,"B",5,5000001,100,0);
     C6Array[1] = new C6(6000002,"","","A",1,1000002,"B",5,5000002,500,250);
-    C6Array[2] = new C6(6000003,"","","A",2,1000002,"B",5,5000002,500);
+    C6Array[2] = new C6(6000003,"","","A",2,2000002,"B",5,5000002,200,0);
+    C6Array[3] = new C6(6000004,"","","A",2,2000001,"B",5,5000001,100,0);
   
-    C7Array[0]= new C7(7000001,"","",5000002,"",100);
+    C7Array[0]= new C7(7000001,"","5/25/2022",5000002,100);
   
     
     console.log(A1Array);
@@ -367,8 +367,10 @@ function mainFunction(){
   
     C6Array[0].executeTransfer();
     C6Array[1].executeTransfer();
+    C6Array[2].executeTransfer();
+    C6Array[3].executeTransfer();
 
-    C7Array[0].executeLanding;
+    C7Array[0].executeLanding();
   
   
   
