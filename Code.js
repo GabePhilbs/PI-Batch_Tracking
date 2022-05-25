@@ -19,7 +19,14 @@ var ss = SpreadsheetApp.getActiveSpreadsheet();
   var B5Output = ss.getSheetByName('Balances B5 Batch'); 
 
 
-
+//object arrays
+var A1Array =[];
+var A2Array =[];
+var A3Array =[];
+var B4Array =[];
+var B5Array =[];
+var C6Array =[];
+var C7Array =[];
 
 
 //3 Group Classes
@@ -177,9 +184,40 @@ class C6 extends CTransactions{
        
     }
 
-    executeTransfer(){
+    
+    increaseDestination (){
+        var targetArray="";
 
-    }
+        switch(this.DestinationType){
+            //object arrays
+           case 1: targetArray = A1Array; break;
+           case 2: targetArray = A2Array; break;
+           case 3: targetArray = A3Array; break;
+           case 4: targetArray = B4Array; break;
+           case 5: targetArray = B5Array; break;
+           case 6: targetArray = C6Array; break;
+           case 7: targetArray = C7Array; break;
+
+        }
+
+
+
+        let index = targetArray.findIndex(x => x.ID === this.DestinationID)
+        targetArray[index].Balance = targetArray[index].Balance + this.Amount;
+      
+        if(this.ClothsclothIncrease != 0){
+          targetArray[index].Cloths = targetArray[index].Cloths + this.Cloths;
+          if(this.DestinationType == 1 ){ targetArray[index].UpdateCloth()}
+      
+        }
+        if(this.DestinationGroup == "A"){ targetArray[index].UpdateBalance()}
+        if(this.DestinationType == 5){ targetArray[index].UpdateCost()}
+      
+      }
+
+      decreaseOrigin(){
+
+      }
     
 }
 
@@ -204,14 +242,7 @@ class C7 extends CTransactions{
 }
 
 
-//object arrays
-var A1Array =[];
-var A2Array =[];
-var A3Array =[];
-var B4Array =[];
-var B5Array =[];
-var C6Array =[];
-var C7Array =[];
+
 
 
 
