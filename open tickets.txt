@@ -1,0 +1,4 @@
+in the test run, the execute transfer works on 2 cases  ut not on a third case
+
+
+executeLanding seems to be doing nothing at all

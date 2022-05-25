@@ -210,7 +210,7 @@ class C6 extends CTransactions{
 
        
 
-        if(this.DestinationGroup = "B"){ //group B will have 3 types of balances
+        if(this.DestinationGroup == "B"){ //group B will have 3 types of balances
 
             //selecting which balance will increase
             let toIncrease = "";
@@ -238,7 +238,7 @@ class C6 extends CTransactions{
 
         
 
-        }else if(this.DestinationGroup = "A"){ //if the destination is in group A, it only has one type of balance
+        }else if(this.DestinationGroup == "A"){ //if the destination is in group A, it only has one type of balance
 
             let index = targetArray.findIndex(x => x.ID === this.DestinationID)
             targetArray[index].Transfers = targetArray[index].Transfers + this.Amount;
@@ -270,7 +270,7 @@ class C6 extends CTransactions{
         }
 
 
-         if(this.OriginGroup = "A"){ //origin always has to be A
+         if(this.OriginGroup == "A"){ //origin always has to be A
 
             let index = originArray.findIndex(x => x.ID === this.OriginID)
             originArray[index].Transfers = originArray[index].Transfers - this.Amount;
@@ -307,6 +307,22 @@ class C7 extends CTransactions{
     }
 
     executeLanding(){
+        //can only land batches, so we already know the array, type and group
+
+        let index = B5Array.findIndex(x => x.ID === this.BatchID)
+
+        //make sure we are dealing with an unlanded batch
+        if(B5Array[index].Landed !=0){console.log("error on lading " + this.ID+ " the batch " + this.BatchID + "has the following landing status: " + B5Array[index].Landed);
+        }else{
+
+            B5Array[index].Landed = 1;
+            B5Array[index].LandedQuantity = this.QuantityLanded;
+            B5Array[index].LandedDate = this.DateLanded;
+            B5Array[index].UpdateCost;
+
+        }
+
+        
 
     }
     
@@ -338,8 +354,9 @@ function mainFunction(){
     
     C6Array[0] = new C6(6000001,"","","A",2,2000001,"B",5,5000001,100,0);
     C6Array[1] = new C6(6000002,"","","A",1,1000002,"B",5,5000002,500,250);
+    C6Array[2] = new C6(6000003,"","","A",2,1000002,"B",5,5000002,500);
   
-  
+    C7Array[0]= new C7(7000001,"","",5000002,"",100);
   
     
     console.log(A1Array);
@@ -350,6 +367,8 @@ function mainFunction(){
   
     C6Array[0].executeTransfer();
     C6Array[1].executeTransfer();
+
+    C7Array[0].executeLanding;
   
   
   
