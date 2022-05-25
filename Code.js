@@ -72,7 +72,7 @@ class BDestinationAccounts{
       
           }
           UpdateBalance(){
-              this.balance = this.ClothPaid + this.ProductionPaid + this.ShippingPaid;
+              this.Balance = this.ClothPaid + this.ProductionPaid + this.ShippingPaid;
           }
     
 }
@@ -228,8 +228,10 @@ class C6 extends CTransactions{
 
             //selecting which balance will increase
             let toIncrease = "";
-            switch(this.OriginType){case 1: "ClothPaid"; break; case 2: "ProductionPaid"; break; case 3: "ShippingPaid" ; break;}
-
+            switch(this.OriginType){
+                case 1: toIncrease = "ClothPaid"; break;
+                case 2: toIncrease =  "ProductionPaid"; break;
+                case 3: toIncrease = "ShippingPaid" ; break;}
 
             //find and increase the acount
             let index = targetArray.findIndex(x => x.ID === this.DestinationID)
