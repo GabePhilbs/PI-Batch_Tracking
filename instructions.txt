@@ -1,0 +1,7 @@
+Transfers can be made between group A source accounts, so comes from a prepayment for cloth can be turned into balance for production if necessary
+
+transfers made to destination accounts are not reversible. That means you cannot transfer out of
+destination accounts. To reverse it, you need to edit the existing transaction.
+
+all blance comes from source accounts. Transfers only move it around, and destination accounts open with 0 balance
+

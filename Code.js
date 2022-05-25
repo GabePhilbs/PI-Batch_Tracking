@@ -64,9 +64,15 @@ class BDestinationAccounts{
         this.ExternalID2 = ExID2;
         this.Date = Date;
         this.Description = Description;
+        this.ClothPaid = 0;
+        this.ProductionPaid = 0;
+        this.ShippingPaid = 0;
         this.Balance = 0;
         this.Cloths = 0;
       
+          }
+          UpdateBalance(){
+              this.balance = this.ClothPaid + this.ProductionPaid + this.ShippingPaid;
           }
     
 }
@@ -188,7 +194,7 @@ class C6 extends CTransactions{
     increaseDestination (){
         var targetArray="";
 
-        switch(this.DestinationType){
+        switch(this.DestinationType){ //based on type we decide which array to access
             //object arrays
            case 1: targetArray = A1Array; break;
            case 2: targetArray = A2Array; break;
@@ -200,19 +206,55 @@ class C6 extends CTransactions{
 
         }
 
-
-
+        //old code does not differentiate between different types of balances
         let index = targetArray.findIndex(x => x.ID === this.DestinationID)
-        targetArray[index].Balance = targetArray[index].Balance + this.Amount;
-      
-        if(this.ClothsclothIncrease != 0){
-          targetArray[index].Cloths = targetArray[index].Cloths + this.Cloths;
-          if(this.DestinationType == 1 ){ targetArray[index].UpdateCloth()}
-      
-        }
-        if(this.DestinationGroup == "A"){ targetArray[index].UpdateBalance()}
-        if(this.DestinationType == 5){ targetArray[index].UpdateCost()}
-      
+
+            targetArray[index].Balance = targetArray[index].Balance + this.Amount;
+        
+            if(this.ClothsclothIncrease != 0){
+            targetArray[index].Cloths = targetArray[index].Cloths + this.Cloths;
+            if(this.DestinationType == 1 ){ targetArray[index].UpdateCloth()}
+        
+            }
+            if(this.DestinationGroup == "A"){ targetArray[index].UpdateBalance()}
+            if(this.DestinationType == 5){ targetArray[index].UpdateCost()}
+
+            
+
+
+
+            //new code, still working on it
+        // if(this.DestinationGroup = "B"){ //group B will have 3 types of balances
+
+        //     let index = targetArray.findIndex(x => x.ID === this.DestinationID)
+        //     targetArray[index].balance = targetArray[index].Balance + this.Amount;
+        
+        //     if(this.ClothsclothIncrease != 0){
+        //     targetArray[index].Cloths = targetArray[index].Cloths + this.Cloths;
+        //     if(this.DestinationType == 1 ){ targetArray[index].UpdateCloth()}
+        
+        //     }
+        //     if(this.DestinationGroup == "A"){ targetArray[index].UpdateBalance()}
+        //     if(this.DestinationType == 5){ targetArray[index].UpdateCost()}
+
+
+
+
+
+        // }else if(this.DestinationGroup = "A"){ //if the destination is in group A, it only has one type of balance
+
+        //     let index = targetArray.findIndex(x => x.ID === this.DestinationID)
+        //     targetArray[index].balance = targetArray[index].Balance + this.Amount;
+        
+        //     if(this.ClothsclothIncrease != 0){
+        //     targetArray[index].Cloths = targetArray[index].Cloths + this.Cloths;
+        //     if(this.DestinationType == 1 ){ targetArray[index].UpdateCloth()}
+        
+        //     }
+        //     if(this.DestinationGroup == "A"){ targetArray[index].UpdateBalance()}
+        //     if(this.DestinationType == 5){ targetArray[index].UpdateCost()}
+
+        // }else{console.log( this.ID + "transaction has invalid destination group" + this.destinationGroup)}
       }
 
       decreaseOrigin(){
@@ -262,8 +304,14 @@ function mainFunction(){
   console.log(B5Array[1]);
 
 
+  A2Array[0] = new A2(2000001,"","","","",500,"","")
 
-  increaseDestination(5000002, 2,20, B5Array, "B",5)
+  someTransfer = new C6(6000001,"","","A",2,2000001,"B",5,5000002,100,0);
+
+  someTransfer.increaseDestination();
+
+
+  //increaseDestination(5000002, 2,20, B5Array, "B",5)
 
 
 
