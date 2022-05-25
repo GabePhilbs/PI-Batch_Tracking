@@ -47,7 +47,7 @@ class AsourceAccounts{
 
     }
     UpdateBalance(){
-        this.Balance = this.InitialBalance - this.Transfers;
+        this.Balance = this.InitialBalance + this.Transfers;
 
     }
 
@@ -74,6 +74,11 @@ class BDestinationAccounts{
           UpdateBalance(){
               this.Balance = this.ClothPaid + this.ProductionPaid + this.ShippingPaid;
           }
+          UpdateCloth(){
+
+            this.ClothBalance = this.Initialcloths - this.ClothTransfers;
+    
+        }
     
 }
 
@@ -219,15 +224,17 @@ class C6 extends CTransactions{
             //find and increase the acount
             let index = targetArray.findIndex(x => x.ID === this.DestinationID)
             targetArray[index][toIncrease] = targetArray[index][toIncrease]+ this.Amount;
+            
         
             if(this.Cloths != 0){
             targetArray[index].Cloths = targetArray[index].Cloths + this.Cloths;
             if(this.DestinationType == 1 ){ targetArray[index].UpdateCloth()}
         
             }
-            targetArray[index].UpdateBalance();
 
             if(this.DestinationType == 5){ targetArray[index].UpdateCost()}
+
+            targetArray[index].UpdateBalance()
 
 
 
@@ -243,8 +250,8 @@ class C6 extends CTransactions{
             targetArray[index].UpdateCloth()
         
             }
-            targetArray[index].UpdateBalance()
             
+            targetArray[index].UpdateBalance()
 
         }else{console.log( this.ID + "transaction has invalid destination group" + this.DestinationGroup)}
       }
@@ -333,7 +340,7 @@ function mainFunction(){
     B5Array[1]= new B5(batchIDFromSheet2,"AC105","","12/05/2022","");
     
     C6Array[0] = new C6(6000001,"","","A",2,2000001,"B",5,5000001,100,0);
-    C6Array[1] = new C6(6000001,"","","A",1,1000002,"B",5,5000002,500,250);
+    C6Array[1] = new C6(6000002,"","","A",1,1000002,"B",5,5000002,500,250);
   
   
   
@@ -344,10 +351,10 @@ function mainFunction(){
     console.log(C6Array);
   
   
-    C6Array[0].increaseDestination
-    C6Array[0].decreaseOrigin
-    C6Array[1].increaseDestination
-    C6Array[1].decreaseOrigin
+    C6Array[0].increaseDestination();
+    C6Array[0].decreaseOrigin();
+    C6Array[1].increaseDestination();
+    C6Array[1].decreaseOrigin();
   
   
   
