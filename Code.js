@@ -220,7 +220,7 @@ class C6 extends CTransactions{
             let index = targetArray.findIndex(x => x.ID === this.DestinationID)
             targetArray[index][toIncrease] = targetArray[index][toIncrease]+ this.Amount;
         
-            if(this.ClothsclothIncrease != 0){
+            if(this.Cloths != 0){
             targetArray[index].Cloths = targetArray[index].Cloths + this.Cloths;
             if(this.DestinationType == 1 ){ targetArray[index].UpdateCloth()}
         
@@ -238,7 +238,7 @@ class C6 extends CTransactions{
             let index = targetArray.findIndex(x => x.ID === this.DestinationID)
             targetArray[index].Transfers = targetArray[index].Transfers + this.Amount;
         
-            if(this.ClothsclothIncrease != 0){
+            if(this.Cloths != 0){
             targetArray[index].Cloths = targetArray[index].ClothTransfers + this.Cloths;
             targetArray[index].UpdateCloth()
         
@@ -270,7 +270,7 @@ class C6 extends CTransactions{
             let index = targetArray.findIndex(x => x.ID === this.OriginID)
             targetArray[index].Transfers = targetArray[index].Transfers - this.Amount;
         
-            if(this.ClothsclothIncrease != 0){
+            if(this.Cloths != 0){
             targetArray[index].Cloths = targetArray[index].ClothTransfers + this.Cloths;
             targetArray[index].UpdateCloth()
         
@@ -353,21 +353,6 @@ function mainFunction(){
 }
 
 
-
-/// transfer  will have two methods: increaseDestination and decreaseOrigin
-function increaseDestination (objID, increase, clothIncrease, targetArray, destinationGroup, destinationType){
-  let index = targetArray.findIndex(x => x.ID === objID)
-  targetArray[index].Balance = targetArray[index].Balance + increase;
-
-  if(clothIncrease != 0){
-    targetArray[index].Cloths = targetArray[index].Cloths + clothIncrease;
-    if(destinationType == 1 ){ targetArray[index].UpdateCloth()}
-
-  }
-  if(destinationGroup == "A"){ targetArray[index].UpdateBalance()}
-  if(destinationType == 5){ targetArray[index].UpdateCost()}
-
-}
 
 
 
