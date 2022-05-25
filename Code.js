@@ -192,7 +192,9 @@ class C6 extends CTransactions{
     }
 
     
-    increaseDestination (){
+    executeTransfer(){
+
+        //INCREASE ORIGIN*****
         var targetArray="";
 
         switch(this.DestinationType){ //based on type we decide which array to access
@@ -250,20 +252,19 @@ class C6 extends CTransactions{
             targetArray[index].UpdateBalance()
 
         }else{console.log( this.ID + "transaction has invalid destination group" + this.DestinationGroup)}
-      }
+      
+       
+       
+        //DECREASE ORIGIN*****
 
-
-
-      decreaseOrigin(){
-
-        var targetArray="";
+        var originArray="";
 
         switch(this.OriginType){ //based on type we decide which array to access
 
         //object arrays
-           case 1: targetArray = A1Array; break;
-           case 2: targetArray = A2Array; break;
-           case 3: targetArray = A3Array; break;
+           case 1: originArray = A1Array; break;
+           case 2: originArray = A2Array; break;
+           case 3: originArray = A3Array; break;
            default: console.log("error on transaction id" + this.ID + "invalid origin type" + this.OriginType); break;
 
         }
@@ -271,15 +272,15 @@ class C6 extends CTransactions{
 
          if(this.OriginGroup = "A"){ //origin always has to be A
 
-            let index = targetArray.findIndex(x => x.ID === this.OriginID)
-            targetArray[index].Transfers = targetArray[index].Transfers - this.Amount;
+            let index = originArray.findIndex(x => x.ID === this.OriginID)
+            originArray[index].Transfers = originArray[index].Transfers - this.Amount;
         
             if(this.Cloths != 0){
-            targetArray[index].ClothTransfers = targetArray[index].ClothTransfers - this.Cloths;
-            targetArray[index].UpdateCloth()
+            originArray[index].ClothTransfers = originArray[index].ClothTransfers - this.Cloths;
+            originArray[index].UpdateCloth()
         
             }
-            targetArray[index].UpdateBalance()
+            originArray[index].UpdateBalance()
             
 
         }else{console.log( this.ID + "transaction has invalid origin group" + this.OriginGroup)}
@@ -347,10 +348,8 @@ function mainFunction(){
     console.log(C6Array);
   
   
-    C6Array[0].increaseDestination();
-    C6Array[0].decreaseOrigin();
-    C6Array[1].increaseDestination();
-    C6Array[1].decreaseOrigin();
+    C6Array[0].executeTransfer();
+    C6Array[1].executeTransfer();
   
   
   
