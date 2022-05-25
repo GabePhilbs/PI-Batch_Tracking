@@ -314,10 +314,18 @@ function mainFunction(){
 
 
   A2Array[0] = new A2(2000001,"","","","",500,"","")
+  A2Array[1] = new A2(2000002,"","","","",400,"","")
 
-  someTransfer = new C6(6000001,"","","A",2,2000001,"B",5,5000002,100,0);
 
-  someTransfer.increaseDestination();
+  A1Array[0] = new A1(1000001,"","","","",1000,"","",500)
+  A1Array[1] = new A1(1000002,"","","","",2000,"","",1000)
+  
+  
+  someTransferA2 = new C6(6000001,"","","A",2,2000001,"B",5,5000002,100,0);
+  someTransferA1 = new C6(6000001,"","","A",1,1000002,"B",5,5000002,500,250);
+
+  someTransferA2.increaseDestination();
+  someTransferA1.increaseDestination();
 
 
   //increaseDestination(5000002, 2,20, B5Array, "B",5)
