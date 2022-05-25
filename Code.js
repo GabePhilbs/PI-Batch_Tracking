@@ -317,7 +317,7 @@ class C7 extends CTransactions{
             B5Array[index].Landed = 1;
             B5Array[index].LandedQuantity = this.QuantityLanded;
             B5Array[index].LandedDate = this.Date;
-            B5Array[index].UpdateCost;
+            B5Array[index].UpdateCost();
 
         }
 
