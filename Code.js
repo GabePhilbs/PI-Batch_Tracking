@@ -2,16 +2,18 @@
 
 var ss = SpreadsheetApp.getActiveSpreadsheet();
   //Input Sheets
-  var A1Input = ss.getSheetByName('Balances A1 Cloth Payment'); 
-  var A2Input = ss.getSheetByName('Balances A2 Production payment'); 
-  var A3Input = ss.getSheetByName('Balances A3 Shipping Payment'); 
-  var B4Input = ss.getSheetByName('Balances B4 Refund'); 
-  var B5Input = ss.getSheetByName('Balances B5 Batch'); 
+  var A0Input = ss.getSheetByName('A0 Other deposits');
+  var A1Input = ss.getSheetByName('A1 Cloth Payment'); 
+  var A2Input = ss.getSheetByName('A2 Production payment'); 
+  var A3Input = ss.getSheetByName("A3 Shipping Payment"); 
+  var B4Input = ss.getSheetByName("B4 Refund"); 
+  var B5Input = ss.getSheetByName('B5 Batch'); 
   var C6Input = ss.getSheetByName('C6 Transfer');
   var C7Input = ss.getSheetByName('C7 Landing'); 
  
 
  //output sheets
+  var A0Output = ss.getSheetByName('Balances A0 Other Deposits');
   var A1Output = ss.getSheetByName('Balances A1 Cloth Payment'); 
   var A2Output = ss.getSheetByName('Balances A2 Production payment'); 
   var A3Output = ss.getSheetByName('Balances A3 Shipping Payment'); 
@@ -20,6 +22,7 @@ var ss = SpreadsheetApp.getActiveSpreadsheet();
 
 
 //object arrays
+var A0Array =[];
 var A1Array =[];
 var A2Array =[];
 var A3Array =[];
@@ -97,6 +100,16 @@ class CTransactions{
 
 // A group child classes
 
+
+// A0 Other deposits
+class A0 extends AsourceAccounts{
+    constructor(ID,ExID1,ExID2,Date, Description, InitialBalance, Payee, BankAccount){
+        super(ID,ExID1,ExID2,Date, Description, InitialBalance, Payee, BankAccount)
+        this.Type = 2;
+       
+    }
+    
+}
 
 
 // A1 cloth deposits
@@ -233,8 +246,6 @@ class C6 extends CTransactions{
             if(this.DestinationType == 5){ targetArray[index].UpdateCost()}
 
             targetArray[index].UpdateBalance()
-
-
 
         
 

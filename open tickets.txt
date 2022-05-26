@@ -2,3 +2,4 @@
 
 executeLanding does not update the cost
 
+Change switches and ifs to accept the new class and array for A0
