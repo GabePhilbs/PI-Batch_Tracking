@@ -359,6 +359,8 @@ var batchIDFromSheet2 = 5000002;
 
 function mainFunction(){
   
+    A0Array[0] = new A2(0000001,"","","","",500,"","")
+
     A1Array[0] = new A1(1000001,"","","","",1000,"","",500)
     A1Array[1] = new A1(1000002,"","","","",2000,"","",1000)
     
@@ -372,6 +374,11 @@ function mainFunction(){
     C6Array[1] = new C6(6000002,"","","A",1,1000002,"B",5,5000002,500,250);
     C6Array[2] = new C6(6000003,"","","A",2,2000002,"B",5,5000002,200,0);
     C6Array[3] = new C6(6000004,"","","A",2,2000001,"B",5,5000001,100,0);
+    C6Array[4] = new C6(6000004,"","","A",2,0000001,"A",2,2000001,100,0);
+
+    //testing a bogus transaction, moving balance from the "Other deposits" directly to destination
+    // the correct thing is to first transfer the balance to one of the other origin accounts
+    C6Array[5] = new C6(6000005,"","","A",2,0000001,"B",5,5000001,100,0);
   
     C7Array[0]= new C7(7000001,"","5/25/2022",5000002,100);
   
@@ -382,12 +389,14 @@ function mainFunction(){
     console.log(C6Array);
   
   
-    C6Array[0].executeTransfer();
-    C6Array[1].executeTransfer();
-    C6Array[2].executeTransfer();
-    C6Array[3].executeTransfer();
+    // C6Array[0].executeTransfer();
+    // C6Array[1].executeTransfer();
+    // C6Array[2].executeTransfer();
+    // C6Array[3].executeTransfer();
+    C6Array[4].executeTransfer();
+    // C6Array[3].executeTransfer();
 
-    C7Array[0].executeLanding();
+    // C7Array[0].executeLanding();
   
   
   
