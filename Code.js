@@ -218,7 +218,7 @@ class C6 extends CTransactions{
             case 3: targetArray = A3Array; break;
             case 4: targetArray = B4Array; break;
             case 5: targetArray = B5Array; break;
-            default: console.log("error on transaction id" + this.ID + "invalid destination type" + this.DestinationType); break;
+            default: throw new Error(" error on transaction id " + this.ID + " invalid destination type " + this.DestinationType); break;
 
         }
 
@@ -232,7 +232,7 @@ class C6 extends CTransactions{
                 case 1: toIncrease = "ClothPaid"; break;
                 case 2: toIncrease =  "ProductionPaid"; break;
                 case 3: toIncrease = "ShippingPaid" ; break;
-                default: console.log("error on transaction id" + this.ID + "invalid origin type" + this.OriginType); break;
+                default: throw new Error(" error on transaction id " + this.ID + " invalid origin type " + this.OriginType); break;
 
             
             }
@@ -282,7 +282,7 @@ class C6 extends CTransactions{
             case 1: originArray = A1Array; break;
             case 2: originArray = A2Array; break;
             case 3: originArray = A3Array; break;
-            default: console.log("error on transaction id" + this.ID + "invalid origin type" + this.OriginType); break;
+            default: throw new Error(" error on transaction id " + this.ID + " invalid origin type " + this.OriginType); break;
 
         }
 
@@ -328,7 +328,7 @@ class C7 extends CTransactions{
         let index = B5Array.findIndex(x => x.ID === this.BatchID)
 
         //make sure we are dealing with an unlanded batch
-        if(B5Array[index].Landed !=0){console.log("error on lading " + this.ID+ " the batch " + this.BatchID + "has the following landing status: " + B5Array[index].Landed);
+        if(B5Array[index].Landed !=0){throw new Error(" error on lading " + this.ID+ " the batch " + this.BatchID + " has the following landing status: " + B5Array[index].Landed);
         }else{
 
             B5Array[index].Landed = 1;
