@@ -393,8 +393,11 @@ function mainFunction(){
     // C6Array[1].executeTransfer();
     // C6Array[2].executeTransfer();
     // C6Array[3].executeTransfer();
-    C6Array[4].executeTransfer();
-    // C6Array[3].executeTransfer();
+    // C6Array[4].executeTransfer();
+
+
+    //bogus transaction for testing, comment out to avoid error
+     C6Array[5].executeTransfer();
 
     // C7Array[0].executeLanding();
   
