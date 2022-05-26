@@ -7,3 +7,5 @@ destination accounts. To reverse it, you need to edit the existing transaction.
 all blance comes from source accounts. Transfers only move it around, and destination accounts open with 0 balance
 
 
+The A0: other balance cannot be transferred to destination accoounts. it has to be transferred to an Orrigin account
+    otherwise the system will not know what is being paid(cloth, production or shipping)

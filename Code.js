@@ -212,12 +212,13 @@ class C6 extends CTransactions{
 
         switch(this.DestinationType){ //based on type we decide which array to access
             //object arrays
-           case 1: targetArray = A1Array; break;
-           case 2: targetArray = A2Array; break;
-           case 3: targetArray = A3Array; break;
-           case 4: targetArray = B4Array; break;
-           case 5: targetArray = B5Array; break;
-           default: console.log("error on transaction id" + this.ID + "invalid destination type" + this.DestinationType); break;
+            case 0: targetArray = A0Array; break;
+            case 1: targetArray = A1Array; break;
+            case 2: targetArray = A2Array; break;
+            case 3: targetArray = A3Array; break;
+            case 4: targetArray = B4Array; break;
+            case 5: targetArray = B5Array; break;
+            default: console.log("error on transaction id" + this.ID + "invalid destination type" + this.DestinationType); break;
 
         }
 
@@ -230,7 +231,11 @@ class C6 extends CTransactions{
             switch(this.OriginType){
                 case 1: toIncrease = "ClothPaid"; break;
                 case 2: toIncrease =  "ProductionPaid"; break;
-                case 3: toIncrease = "ShippingPaid" ; break;}
+                case 3: toIncrease = "ShippingPaid" ; break;
+                default: console.log("error on transaction id" + this.ID + "invalid origin type" + this.OriginType); break;
+
+            
+            }
 
             //find and increase the acount
             let index = targetArray.findIndex(x => x.ID === this.DestinationID)
@@ -273,10 +278,11 @@ class C6 extends CTransactions{
         switch(this.OriginType){ //based on type we decide which array to access
 
         //object arrays
-           case 1: originArray = A1Array; break;
-           case 2: originArray = A2Array; break;
-           case 3: originArray = A3Array; break;
-           default: console.log("error on transaction id" + this.ID + "invalid origin type" + this.OriginType); break;
+            case 0: originArray = A0Array; break;
+            case 1: originArray = A1Array; break;
+            case 2: originArray = A2Array; break;
+            case 3: originArray = A3Array; break;
+            default: console.log("error on transaction id" + this.ID + "invalid origin type" + this.OriginType); break;
 
         }
 
@@ -310,7 +316,7 @@ class C7 extends CTransactions{
         this.Type = 7;
 
         this.BatchID = BatchID;
-        this.QuantityLanded =QuantityLanded
+        this.QuantityLanded = QuantityLanded
 
 
        
