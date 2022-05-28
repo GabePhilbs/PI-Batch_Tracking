@@ -67,3 +67,29 @@ function printObjects(arr2,printSheet){
 
 
 }
+
+
+//imports data from a sheet and turns it into an object array
+//needs a source sheet, an array to each add each row, and
+// a class that will be used to create the objects
+function importObjects(originSheet,objectArray,objectClass){
+
+
+//get the range and save on a temporary array of arrays
+        //e.g. let tempArray = get range
+
+
+
+//each element o=f the outer array will become an object
+// use the values for the inner array as parameters in the constructor
+    // e.g. 
+    //objectArray[n] = new objectClass(tempArray[n][i],...)
+
+
+
+
+
+
+
+
+};
