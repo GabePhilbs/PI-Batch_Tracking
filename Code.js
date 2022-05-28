@@ -383,10 +383,10 @@ function mainFunction(){
     C7Array[0]= new C7(7000001,"","5/25/2022",5000002,100);
   
     
-    console.log(A1Array);
-    console.log(A2Array);
-    console.log(B5Array);
-    console.log(C6Array);
+    // console.log(A1Array);
+    // console.log(A2Array);
+    // console.log(B5Array);
+    // console.log(C6Array);
   
   
     // C6Array[0].executeTransfer();
@@ -397,17 +397,19 @@ function mainFunction(){
 
 
     //bogus transaction for testing, comment out to avoid error
-     C6Array[5].executeTransfer();
+    // C6Array[5].executeTransfer();
 
     // C7Array[0].executeLanding();
   
   
   
   
-    console.log(A1Array);
-    console.log(A2Array);
-    console.log(B5Array);
-    console.log(C6Array);
+    // console.log(A1Array);
+    // console.log(A2Array);
+    // console.log(B5Array);
+    // console.log(C6Array);
+
+    printObjects(A1Array,A1Output)
     
   }
 
