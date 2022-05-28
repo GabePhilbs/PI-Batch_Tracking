@@ -4,11 +4,17 @@ function printObjects(arr2){
     arr1 = Object.keys(arr2[0]);
 
     arr3=[];
-    arr3[0]=arr1;
+    arr3[0] = arr1;
 
-    let i= 0;
+    let i = 0;
 
     while(i < arr2.length){
-        
+        arr3[i+1] = arr2[i];
     }
+    
+
+
+
+
+
 }
