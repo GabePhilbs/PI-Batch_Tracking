@@ -17,13 +17,25 @@ function printObjects(arr2,printSheet){
 //fill output the array that will be printed
 //we loop through object array, then through key array, 
 //adding each property to the internal array
-    let n =0;
+    let n = 0;
     while(n < arr2.length){
+
+        //declare that the next element is an array
+        //otherise you will feed the property  [i] to an undefined variable
+        arr3[n+1] = [];
 
         let i = 0;
         while(i < arr1.length){
-            arr3[n+1] = arr2[n][arr1[i]];
+            arr3[n+1][i] = arr2[n][arr1[i]];
             i++;
+
+            console.log(arr3[n+1]);
+            console.log(arr2[n]);
+            console.log(arr1[i])
+            //arr2[n][arr1[i]]
+
+
+
         }
         n++;
     }
@@ -35,7 +47,11 @@ function printObjects(arr2,printSheet){
     //getRange paramenters (first row, first column, number of rows, number of coulumns)
     printSheet.getRange(1,1,1000,30).clearContent();
 
-
+    console.log(arr1);
+    console.log(arr2);
+    console.log(arr3);
+    console.log(arr3.length);
+    console.log(arr3[0].length);
 
 //print array
     //e.g
