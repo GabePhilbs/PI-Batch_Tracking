@@ -28,43 +28,17 @@ function printObjects(arr2,printSheet){
         while(i < arr1.length){
             arr3[n+1][i] = arr2[n][arr1[i]];
             i++;
-
-            console.log(arr3[n+1]);
-            console.log(arr2[n]);
-            console.log(arr1[i])
-            //arr2[n][arr1[i]]
-
-
-
         }
         n++;
     }
 
 
 //clear sheet
-    //e.g.
-    //InvoicesSheet.getRange(1,1,1000,30).clearContent();
     //getRange paramenters (first row, first column, number of rows, number of coulumns)
     printSheet.getRange(1,1,1000,30).clearContent();
 
-    console.log(arr1);
-    console.log(arr2);
-    console.log(arr3);
-    console.log(arr3.length);
-    console.log(arr3[0].length);
-
 //print array
-    //e.g
-    // InvoicesSheet.getRange(2,1,printArray.length,printArray[1].length).setValues(printArray);
     printSheet.getRange(1,1,arr3.length,arr3[0].length).setValues(arr3);
-
-
-
-
-
-
-
-
 
 }
 
