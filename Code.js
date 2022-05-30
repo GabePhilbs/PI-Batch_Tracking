@@ -354,7 +354,9 @@ function mainFunction(){
 //still it is better if everything matches, because this can get confusing
 
     A2Arguments = [ID,ExID1,ExID2,Date, Description, InitialBalance, Payee, BankAccount];
-    importObjects(A2Input,A2Arguments,A2,A2Output);
+    importObjects(A2Input,A2Arguments,A2,A2Array);
+
+    console.log(A2Array);
 
 
 
