@@ -65,38 +65,41 @@ function importObjects(originSheet,argumentArray,objectClass,objectArray){
 
     //lets populate the position array
     let k = 0;
-    while(k<argumentArray.lenght){
+    while(k < argumentArray.length){
         let i =0;
-        while(i<arrayFromSheet[0]){
+        while(i<arrayFromSheet[0].length){
             if(arrayFromSheet[0][i] == argumentArray[k]){positionArray.push(i)};
 
             i++;
 
         }
-
+        k++
     }
     
     //now, we need to rearrange the values in this array so that they match the order in which
     //the object constructor must receive its keys
-    let arrayForConstructor =[];
+    
 
     //loop through the position array, getting data from the respective rows in the spreadsheet
-    let n =0;
+    //skip the first row because it is labels
+    let n =1;
     
-    while(n<arrayFromSheet.lenght){
+    while(n < arrayFromSheet.length){
 
         let thisObjectArguments =[];
         let i= 0;
-        while(i<positionArray.lentgh){
-            thisPosition = positionarray[i];
-            thisObjectArguments.push(arrayFromSheet[n][position])
+        while(i<positionArray.length){
+            thisPosition = positionArray[i];
+            thisObjectArguments.push(arrayFromSheet[n][thisPosition])
+
+            i++
         }
-        
+       
         let thisObject = new objectClass(...thisObjectArguments);
 
         objectArray.push(thisObject);
 
-       
+       n++
     };
 
 

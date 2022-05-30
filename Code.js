@@ -353,11 +353,10 @@ function mainFunction(){
 //it does not need to mach the key names, since they are determined by the order entered in the constructor
 //still it is better if everything matches, because this can get confusing
 
-    A2Arguments = [ID,ExID1,ExID2,Date, Description, InitialBalance, Payee, BankAccount];
+    A2Arguments = ["ID","ExID1","ExID2","Date", "Description", "InitialBalance", "Payee", "BankAccount"];
     importObjects(A2Input,A2Arguments,A2,A2Array);
 
-    console.log(A2Array);
-
+    
 
 
 }
