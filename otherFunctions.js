@@ -47,18 +47,18 @@ function printObjects(arr2,printSheet){
 //needs a source sheet, an array to each add each row, and a class that will be used to create the objects
 //also needs an array of key, which can be obtaine using object.keys() on a sample object created -
 //- in the main function, before the importObjects function is called
-var keyArray = Object.keys(sampleObject);
+//var keyArray = Object.keys(sampleObject);
 function importObjects(originSheet,keyArray,objectClass,objectArray){
 
     let numberOfColumns = keyArray.length;
 
 
 //find the last row of the sheet
-    let lastRow = originSheet.getLastRow;
+    let lastRow = originSheet.getLastRow();
 //get the range and save on a temporary array of arrays
     let tempArray = originSheet.getRange(1,1, lastRow, numberOfColumns).getValues();
 
-    console.log(tempArray);
+   
 
 
 //each element of the outer array will become an object
