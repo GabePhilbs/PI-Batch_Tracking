@@ -353,10 +353,18 @@ function mainFunction(){
 //it does not need to mach the key names, since they are determined by the order entered in the constructor
 //still it is better if everything matches, because this can get confusing
 
-    A2Arguments = ["ID","ExID1","ExID2","Date", "Description", "InitialBalance", "Payee", "BankAccount"];
+    let A0Arguments = ["ID","ExID1","ExID2","Date", "Description", "InitialBalance", "Payee", "BankAccount"];
+    importObjects(A0Input,A0Arguments,A0,A0Array);
+    let A1Arguments = ["ID","ExID1","ExID2","Date", "Description", "InitialBalance", "Payee", "BankAccount","Initialcloths"];
+    importObjects(A1Input,A1Arguments,A1,A1Array);
+    let A2Arguments = ["ID","ExID1","ExID2","Date", "Description", "InitialBalance", "Payee", "BankAccount"];
     importObjects(A2Input,A2Arguments,A2,A2Array);
-
-    
+    let A3Arguments = ["ID","ExID1","ExID2","Date", "Description", "InitialBalance", "Payee", "BankAccount"];
+    importObjects(A3Input,A3Arguments,A3,A3Array);
+    let B4Arguments = ["ID","ExID1","ExID2","Date", "Description","BankAccount"];
+    let B5Arguments = ["ID","ExID1","ExID2","Date", "Description"];
+    let C6Arguments = ["ID","ExID","Date","OriginGroup","OriginType","OriginID","DestinationGroup","DestinationType","DestinationID", "Amount", "Cloths"];
+    let C7Arguments = ["ID","ExID","Date","BatchID", "QuantityLanded"];
 
 
 }
