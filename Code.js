@@ -347,6 +347,7 @@ class C7 extends CTransactions{
 
 
 //main function
+function mainFunction(){
 // create sample objects
 //botain key arrays 
 // execute imports
@@ -367,7 +368,7 @@ var sampleC7 = new C7(7000001,"","5/25/2022",5000001,100);
 
 
 
-
+}
 
 
 
@@ -385,7 +386,11 @@ var batchIDFromSheet2 = 5000002;
 //var firstBatch = new B5(batchIDFromSheet,"AC105","","12/05/2022","");
 
 
-function mainFunction(){
+
+
+
+
+function testFunction(){
   
     A0Array[0] = new A0(0000001,"","","","",500,"","")
 
