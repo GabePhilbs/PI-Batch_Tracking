@@ -85,12 +85,17 @@ function importObjects(originSheet,argumentArray,objectClass,objectArray){
     
     while(n<arrayFromSheet.lenght){
 
-        let thisObject =[];
+        let thisObjectArguments =[];
         let i= 0;
         while(i<positionArray.lentgh){
             thisPosition = positionarray[i];
-            thisObject.push(arrayFromSheet[n][position])
+            thisObjectArguments.push(arrayFromSheet[n][position])
         }
+        
+        let thisObject = new objectClass(...thisObjectArguments);
+
+        objectArray.push(thisObject);
+
        
     };
 
