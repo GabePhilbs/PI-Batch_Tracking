@@ -248,6 +248,7 @@ class C6 extends CTransactions{
         
             }
 
+            //updates cost(per unit) of batch in case the landing was executed before this transfer
             if(this.DestinationType == 5){ targetArray[index].UpdateCost()}
 
             targetArray[index].UpdateBalance()
@@ -345,11 +346,38 @@ class C7 extends CTransactions{
 }
 
 
+//main function
+// create sample objects
+//botain key arrays 
+// execute imports
+// execute transfers
+//execute landings
+//execute exports
+
+//sample objects
+
+var sampleA0 = new A0(0000001,"","","","",500,"","");
+var sampleA1 = new A1(1000001,"","","","",1000,"","",500);
+var sampleA2 = new A2(2000001,"","","","",500,"","");
+var sampleA3 = new A3(3000001,"","","","",500,"","");
+var sampleA4 = new B4(4000001,"",'','12/05/2022',"","")
+var sampleB5 = new B5(5000001,"AC105","","12/05/2022","");
+var sampleC6 = new C6(6000001,"","","A",2,2000001,"B",5,5000001,100,0);
+var sampleC7 = new C7(7000001,"","5/25/2022",5000001,100);
 
 
 
 
-//////// testing stuff
+
+
+
+///---------------------------------------------------------------------------------------
+/////// TESTING STUFF, DELETE EVERYTHING BELOW THIS LINE ON CLEANUP FASE!!!!!!!!!!!!!
+
+
+
+
+
 
 var batchIDFromSheet = 5000001;
 var batchIDFromSheet2 = 5000002;
@@ -359,7 +387,7 @@ var batchIDFromSheet2 = 5000002;
 
 function mainFunction(){
   
-    A0Array[0] = new A2(0000001,"","","","",500,"","")
+    A0Array[0] = new A0(0000001,"","","","",500,"","")
 
     A1Array[0] = new A1(1000001,"","","","",1000,"","",500)
     A1Array[1] = new A1(1000002,"","","","",2000,"","",1000)
@@ -378,7 +406,7 @@ function mainFunction(){
 
     //testing a bogus transaction, moving balance from the "Other deposits" directly to destination
     // the correct thing is to first transfer the balance to one of the other origin accounts
-    C6Array[5] = new C6(6000005,"","","A",0,0000001,"B",5,5000001,100,0);
+    //C6Array[5] = new C6(6000005,"","","A",0,0000001,"B",5,5000001,100,0);
   
     C7Array[0]= new C7(7000001,"","5/25/2022",5000002,100);
   
@@ -410,6 +438,9 @@ function mainFunction(){
     // console.log(C6Array);
 
     printObjects(A1Array,A1Output)
+
+
+    
     
   }
 

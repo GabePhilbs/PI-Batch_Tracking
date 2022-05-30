@@ -44,21 +44,22 @@ function printObjects(arr2,printSheet){
 
 
 //imports data from a sheet and turns it into an object array
-//needs a source sheet, an array to each add each row, and
-// a class that will be used to create the objects
-function importObjects(originSheet,objectArray,objectClass){
+//needs a source sheet, an array to each add each row, and a class that will be used to create the objects
+//also needs an array of key, which can be obtaine using object.keys() on a sample object created -
+//- in the main function, before the importObjects function is called
+var keyArray = Object.keys(sampleObject);
+function importObjects(originSheet,keyArray,objectClass,objectArray){
 
+    let numberOfColumns = keyArray.length;
 
 //get the range and save on a temporary array of arrays
-        //e.g. let tempArray = get range
-
+    let tempArray = originSheet.getRange (1,1, "as many rows until empty", numberOfColumns)
 
 
 //each element o=f the outer array will become an object
 // use the values for the inner array as parameters in the constructor
     // e.g. 
     //objectArray[n] = new objectClass(tempArray[n][i],...)
-
 
 
 
