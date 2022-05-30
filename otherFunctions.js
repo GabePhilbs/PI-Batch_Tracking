@@ -52,11 +52,16 @@ function importObjects(originSheet,keyArray,objectClass,objectArray){
 
     let numberOfColumns = keyArray.length;
 
+
+//find the last row of the sheet
+    let lastRow = originSheet.getLastRow;
 //get the range and save on a temporary array of arrays
-    let tempArray = originSheet.getRange (1,1, "as many rows until empty", numberOfColumns)
+    let tempArray = originSheet.getRange(1,1, lastRow, numberOfColumns).getValues();
+
+    console.log(tempArray);
 
 
-//each element o=f the outer array will become an object
+//each element of the outer array will become an object
 // use the values for the inner array as parameters in the constructor
     // e.g. 
     //objectArray[n] = new objectClass(tempArray[n][i],...)

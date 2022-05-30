@@ -366,6 +366,19 @@ var sampleB5 = new B5(5000001,"AC105","","12/05/2022","");
 var sampleC6 = new C6(6000001,"","","A",2,2000001,"B",5,5000001,100,0);
 var sampleC7 = new C7(7000001,"","5/25/2022",5000001,100);
 
+let A0Keys = Object.keys(sampleA0);
+let A1Keys = Object.keys(sampleA2);
+let A2Keys = Object.keys(sampleA2);
+let A3Keys = Object.keys(sampleA3);
+let B4Keys = Object.keys(sampleB4);
+let B5Keys = Object.keys(sampleB5);
+let C6Keys = Object.keys(sampleC6);
+let C7Keys = Object.keys(sampleC7);
+
+
+
+importObjects(A2Input,A2Keys,A2,A2Output);
+
 
 
 }
