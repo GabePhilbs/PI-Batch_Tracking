@@ -57,8 +57,43 @@ function importObjects(originSheet,keyArray,objectClass,objectArray){
     let lastRow = originSheet.getLastRow();
 //get the range and save on a temporary array of arrays
     let tempArray = originSheet.getRange(1,1, lastRow, numberOfColumns).getValues();
+    //now, we need to rearrange the values in this array so that they match the order in which
+    //the object constructor must receive its keys
+    let arrayForConstructor =[];
+    // we discover the order and save it on an array positionArray, so we don't have to redo the search for each row
+    let positionArray = [];
 
+    let k = 0;
+    while(k<tempArray[0].lenght){
+        let i =0;
+        while(i<){}
+
+    }
    
+
+
+    //loop through rows of imported data
+    //we start on row 1 because row 0 is labels
+    let n =1;
+    while(n<tempArray.lenght){
+
+        //in each row, loop through columns(cells)
+        let i = 0;
+        while(i<tempArray[n].length){
+            
+            //on each cell we look through object keys to figure out where in the object creation array it goes
+
+
+
+
+        
+
+
+
+        }
+    
+        n++
+    };
 
 
 //each element of the outer array will become an object
