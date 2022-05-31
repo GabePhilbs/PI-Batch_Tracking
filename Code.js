@@ -32,7 +32,7 @@ var C6Array =[];
 var C7Array =[];
 
 
-//3 Group Classes
+//Part 3: Group Classes
 
 class AsourceAccounts{
   constructor(ID,ExID1,ExID2,Date, Description, InitialBalance, Payee, BankAccount){
@@ -42,9 +42,9 @@ class AsourceAccounts{
   this.ExternalID2 = ExID2;
   this.Date = Date;
   this.Description = Description;
-  this.InitialBalance = InitialBalance;
-  this.Transfers = 0;
-  this.CurrentBalance = InitialBalance;
+  this.InitialBalance = 1.0 * InitialBalance;
+  this.Transfers = 0.0;
+  this.CurrentBalance = 1.0 * InitialBalance;
   this.Payee = Payee;
   this.BankAccount = BankAccount;
 
@@ -67,11 +67,11 @@ class BDestinationAccounts{
         this.ExternalID2 = ExID2;
         this.Date = Date;
         this.Description = Description;
-        this.ClothPaid = 0;
-        this.ProductionPaid = 0;
-        this.ShippingPaid = 0;
-        this.Balance = 0;
-        this.Cloths = 0;
+        this.ClothPaid = 0.0;
+        this.ProductionPaid = 0.0;
+        this.ShippingPaid = 0.0;
+        this.Balance = 0.0;
+        this.Cloths = 0.0;
       
           }
           UpdateBalance(){
@@ -91,7 +91,7 @@ class CTransactions{
     }
 }
 
-
+//Part 4: Type classes
 //Child classes, one for each type. Production and shipping could use the parent classes
 // because they have no specific properties or methods. However I decided that
 // having all classes be type specific, except for two, would be confusing.
@@ -105,7 +105,7 @@ class CTransactions{
 class A0 extends AsourceAccounts{
     constructor(ID,ExID1,ExID2,Date, Description, InitialBalance, Payee, BankAccount){
         super(ID,ExID1,ExID2,Date, Description, InitialBalance, Payee, BankAccount)
-        this.Type = 2;
+        this.Type = 0;
        
     }
     
@@ -117,7 +117,7 @@ class A1 extends AsourceAccounts{
     constructor(ID,ExID1,ExID2,Date, Description, InitialBalance, Payee, BankAccount,Initialcloths){
         super(ID,ExID1,ExID2,Date, Description, InitialBalance, Payee, BankAccount)
         this.Type = 1;
-        this.Initialcloths = Initialcloths;
+        this.Initialcloths = 1.0*Initialcloths;
         this.ClothTransfers = 0;
         this.ClothBalance =  Initialcloths;
     }
@@ -168,10 +168,10 @@ class B5 extends BDestinationAccounts{
     constructor(ID,ExID1,ExID2,Date, Description){
         super(ID,ExID1,ExID2,Date, Description)
         this.Type = 5;
-        this.Landed = 0;
+        this.Landed = 0.0;
         this.LandedDate= "";
-        this.LandedQuantity = 0;
-        this.Cost= 0;
+        this.LandedQuantity = 0.0;
+        this.Cost= 0.0;
     } 
 
     UpdateCost(){
@@ -199,8 +199,8 @@ class C6 extends CTransactions{
         this.DestinationGroup = DestinationGroup;
         this.DestinationType = DestinationType;
         this.DestinationID = DestinationID;
-        this.Amount = Amount;
-        this.Cloths = Cloths;
+        this.Amount = 1.0 * Amount;
+        this.Cloths = 1.0 * Cloths;
        
     }
 
@@ -317,7 +317,7 @@ class C7 extends CTransactions{
         this.Type = 7;
 
         this.BatchID = BatchID;
-        this.QuantityLanded = QuantityLanded
+        this.QuantityLanded = QuantityLanded;
 
 
        
@@ -345,7 +345,7 @@ class C7 extends CTransactions{
     
 }
 
-
+//Part 5: Main function
 //main function
 function mainFunction(){
 //need a list of arguments for the constroctur to be used in importObjects
@@ -404,78 +404,82 @@ function mainFunction(){
 
 
 
-var batchIDFromSheet = 5000001;
-var batchIDFromSheet2 = 5000002;
+// var batchIDFromSheet = 5000001;
+// var batchIDFromSheet2 = 5000002;
 
-//var firstBatch = new B5(batchIDFromSheet,"AC105","","12/05/2022","");
-
-
+// //var firstBatch = new B5(batchIDFromSheet,"AC105","","12/05/2022","");
 
 
 
 
-function testFunction(){
+
+
+// function testFunction(){
+//   console.log("running test function");
   
-    A0Array[0] = new A0(0000001,"","","","",500,"","")
+//     A0Array[0] = new A0(0000001,"","","","",500,"","")
 
-    A1Array[0] = new A1(1000001,"","","","",1000,"","",500)
-    A1Array[1] = new A1(1000002,"","","","",2000,"","",1000)
+//     A1Array[0] = new A1(1000001,"","","","",1000,"","",500)
+//     A1Array[1] = new A1(1000002,"","","","",2000,"","",1000)
     
-    A2Array[0] = new A2(2000001,"","","","",500,"","")
-    A2Array[1] = new A2(2000002,"","","","",400,"","")
+//     A2Array[0] = new A2(2000001,"","","","",500,"","")
+//     A2Array[1] = new A2(2000002,"","","","",400,"","")
 
-    A3Array[0] = new A3(3000001,"","","","",400,"","")
+//     A3Array[0] = new A3(3000001,"","","","",400,"","")
 
-    B4Array[0] = new B4(4000001,"","","","",2200102);
+//     B4Array[0] = new B4(4000001,"","","","",2200102);
     
-    B5Array[0]= new B5(batchIDFromSheet,"AC105","","12/05/2022","");
-    B5Array[1]= new B5(batchIDFromSheet2,"AC105","","12/05/2023","");
+//     B5Array[0]= new B5(batchIDFromSheet,"AC105","","12/05/2022","");
+//     B5Array[1]= new B5(batchIDFromSheet2,"AC105","","12/05/2023","");
     
-    C6Array[0] = new C6(6000001,"","","A",2,2000001,"B",5,5000001,100,0);
-    C6Array[1] = new C6(6000002,"","","A",1,1000002,"B",5,5000002,500,250);
-    C6Array[2] = new C6(6000003,"","","A",2,2000002,"B",5,5000002,200,0);
-    C6Array[3] = new C6(6000004,"","","A",2,2000001,"B",5,5000001,100,0);
-    C6Array[4] = new C6(6000005,"","","A",0,0000001,"A",2,2000001,100,0);
+//     C6Array[0] = new C6(6000001,"","","A",2,2000001,"B",5,5000001,100,0);
+//     C6Array[1] = new C6(6000002,"","","A",1,1000002,"B",5,5000002,500,250);
+//     C6Array[2] = new C6(6000003,"","","A",2,2000002,"B",5,5000002,200,0);
+//     C6Array[3] = new C6(6000004,"","","A",2,2000001,"B",5,5000001,100,0);
+//     C6Array[4] = new C6(6000005,"","","A",0,0000001,"A",2,2000001,100,0);
 
-    //testing a bogus transaction, moving balance from the "Other deposits" directly to destination
-    // the correct thing is to first transfer the balance to one of the other origin accounts
-    //C6Array[5] = new C6(6000006,"","","A",0,0000001,"B",5,5000001,100,0);
+//     //testing a bogus transaction, moving balance from the "Other deposits" directly to destination
+//     // the correct thing is to first transfer the balance to one of the other origin accounts
+//     //C6Array[5] = new C6(6000006,"","","A",0,0000001,"B",5,5000001,100,0);
   
-    C7Array[0]= new C7(7000001,"","5/25/2022",5000002,100);
+//     C7Array[0]= new C7(7000001,"","5/25/2022",5000002,100);
   
     
-    // console.log(A1Array);
-    // console.log(A2Array);
-    // console.log(B5Array);
-    // console.log(C6Array);
+//     // console.log(A1Array);
+//     // console.log(A2Array);
+//     // console.log(B5Array);
+//     // console.log(C6Array);
   
   
-    // C6Array[0].executeTransfer();
-    // C6Array[1].executeTransfer();
-    // C6Array[2].executeTransfer();
-    // C6Array[3].executeTransfer();
-    // C6Array[4].executeTransfer();
+//     C6Array[0].executeTransfer();
+//     C6Array[1].executeTransfer();
+//     C6Array[2].executeTransfer();
+//     C6Array[3].executeTransfer();
+//     C6Array[4].executeTransfer();
 
 
-    //bogus transaction for testing, comment out to avoid error
-    // C6Array[5].executeTransfer();
+//     //bogus transaction for testing, comment out to avoid error
+//     // C6Array[5].executeTransfer();
 
-    // C7Array[0].executeLanding();
+//     C7Array[0].executeLanding();
   
   
   
-  
-    // console.log(A1Array);
-    // console.log(A2Array);
-    // console.log(B5Array);
-    // console.log(C6Array);
+//     console.log(A0Array);
+//     console.log(A1Array);
+//     console.log(A2Array);
+//     console.log(A3Array);
+//     console.log(B4Array);
+//     console.log(B5Array);
+//     console.log(C6Array);
+//     console.log(C7Array);
 
-    //printObjects(A1Array,A1Output)
+//     //printObjects(A1Array,A1Output)
 
 
     
     
-  }
+//   }
 
  
 
