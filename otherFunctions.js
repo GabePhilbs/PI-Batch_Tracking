@@ -2,7 +2,12 @@
 //this function prints an array of ojects to a sheet, including a title row
 //arr2 is the array of objects that will be printed
 //printSheet is the sheet where it wil be printed
-function printObjects(arr2,printSheet){
+function printObjects(arrayOfObjects,printSheet){
+
+    //lazy to rename var so I'm just doing this
+   let  arr2 = arrayOfObjects;
+
+
     arr1 = Object.keys(arr2[0]);
 
     arr3=[];

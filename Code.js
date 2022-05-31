@@ -352,6 +352,7 @@ function mainFunction(){
 //basically just list the name of the arguments. Syntax has to match the spreadsheet labels
 //it does not need to mach the key names, since they are determined by the order entered in the constructor
 //still it is better if everything matches, because this can get confusing
+//As I create a list of arguments, I use the import function to retrieve the data from the sheet
 
     let A0Arguments = ["ID","ExID1","ExID2","Date", "Description", "InitialBalance", "Payee", "BankAccount"];
     importObjects(A0Input,A0Arguments,A0,A0Array);
@@ -362,9 +363,33 @@ function mainFunction(){
     let A3Arguments = ["ID","ExID1","ExID2","Date", "Description", "InitialBalance", "Payee", "BankAccount"];
     importObjects(A3Input,A3Arguments,A3,A3Array);
     let B4Arguments = ["ID","ExID1","ExID2","Date", "Description","BankAccount"];
+    importObjects(B4Input,B4Arguments,B4,B4Array);
     let B5Arguments = ["ID","ExID1","ExID2","Date", "Description"];
+    importObjects(B5Input,B5Arguments,B5,B5Array);
     let C6Arguments = ["ID","ExID","Date","OriginGroup","OriginType","OriginID","DestinationGroup","DestinationType","DestinationID", "Amount", "Cloths"];
+    importObjects(C6Input,C6Arguments,C6,C6Array);
     let C7Arguments = ["ID","ExID","Date","BatchID", "QuantityLanded"];
+    importObjects(C7Input,C7Arguments,C7,C7Array);
+
+
+    //at this point all object barrays should be populated
+    //Now I execute the transfers
+    let ja = 0
+    while(ja < C6Array.length){C6Array[ja].executeTransfer();};
+
+    //now execute landings
+    let jb = 0
+    while(jb < C7Array.length){C7Array[jb].executeLanding();};
+
+
+    //now we print the results to the respective sheets
+    printObjects(A0Array,A0Output);
+    printObjects(A1Array,A1Output);
+    printObjects(A2Array,A2Output);
+    printObjects(A3Array,A3Output);
+    printObjects(B4Array,B4Output);
+    printObjects(B5Array,B5Output);
+
 
 
 }
@@ -398,19 +423,23 @@ function testFunction(){
     
     A2Array[0] = new A2(2000001,"","","","",500,"","")
     A2Array[1] = new A2(2000002,"","","","",400,"","")
+
+    A3Array[0] = new A3(3000001,"","","","",400,"","")
+
+    B4Array[0] = new B4(4000001,"","","","",2200102);
     
     B5Array[0]= new B5(batchIDFromSheet,"AC105","","12/05/2022","");
-    B5Array[1]= new B5(batchIDFromSheet2,"AC105","","12/05/2022","");
+    B5Array[1]= new B5(batchIDFromSheet2,"AC105","","12/05/2023","");
     
     C6Array[0] = new C6(6000001,"","","A",2,2000001,"B",5,5000001,100,0);
     C6Array[1] = new C6(6000002,"","","A",1,1000002,"B",5,5000002,500,250);
     C6Array[2] = new C6(6000003,"","","A",2,2000002,"B",5,5000002,200,0);
     C6Array[3] = new C6(6000004,"","","A",2,2000001,"B",5,5000001,100,0);
-    C6Array[4] = new C6(6000004,"","","A",0,0000001,"A",2,2000001,100,0);
+    C6Array[4] = new C6(6000005,"","","A",0,0000001,"A",2,2000001,100,0);
 
     //testing a bogus transaction, moving balance from the "Other deposits" directly to destination
     // the correct thing is to first transfer the balance to one of the other origin accounts
-    //C6Array[5] = new C6(6000005,"","","A",0,0000001,"B",5,5000001,100,0);
+    //C6Array[5] = new C6(6000006,"","","A",0,0000001,"B",5,5000001,100,0);
   
     C7Array[0]= new C7(7000001,"","5/25/2022",5000002,100);
   
@@ -441,7 +470,7 @@ function testFunction(){
     // console.log(B5Array);
     // console.log(C6Array);
 
-    printObjects(A1Array,A1Output)
+    //printObjects(A1Array,A1Output)
 
 
     
