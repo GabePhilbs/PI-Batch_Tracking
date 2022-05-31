@@ -176,7 +176,7 @@ class B5 extends BDestinationAccounts{
 
     UpdateCost(){
         if(this.Landed == 1){
-            this.cost = this.Balance/ this.LandedQuantity;
+            this.Cost = this.Balance/ this.LandedQuantity;
 
         }
     }
