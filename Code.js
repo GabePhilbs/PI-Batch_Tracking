@@ -375,11 +375,11 @@ function mainFunction(){
     //at this point all object barrays should be populated
     //Now I execute the transfers
     let ja = 0
-    while(ja < C6Array.length){C6Array[ja].executeTransfer();};
+    while(ja < C6Array.length){C6Array[ja].executeTransfer(); ja++;};
 
     //now execute landings
     let jb = 0
-    while(jb < C7Array.length){C7Array[jb].executeLanding();};
+    while(jb < C7Array.length){C7Array[jb].executeLanding(); jb++};
 
 
     //now we print the results to the respective sheets
