@@ -1,5 +1,3 @@
 
 
-executeLanding does not update the cost
-
-Change switches and ifs to accept the new class and array for A0
+On the batch accounts cost was posting , but it broke when I tried to change it to float inteat of int. no idea why.
