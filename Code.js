@@ -71,7 +71,7 @@ class BDestinationAccounts{
         this.ProductionPaid = 0.0;
         this.ShippingPaid = 0.0;
         this.Balance = 0.0;
-        this.Cloths = 0.0;
+        this.Cloths = 0;
       
           }
           UpdateBalance(){
@@ -117,7 +117,7 @@ class A1 extends AsourceAccounts{
     constructor(ID,ExID1,ExID2,Date, Description, InitialBalance, Payee, BankAccount,Initialcloths){
         super(ID,ExID1,ExID2,Date, Description, InitialBalance, Payee, BankAccount)
         this.Type = 1;
-        this.Initialcloths = 1.0*Initialcloths;
+        this.Initialcloths = Initialcloths;
         this.ClothTransfers = 0;
         this.ClothBalance =  Initialcloths;
     }
@@ -168,9 +168,9 @@ class B5 extends BDestinationAccounts{
     constructor(ID,ExID1,ExID2,Date, Description){
         super(ID,ExID1,ExID2,Date, Description)
         this.Type = 5;
-        this.Landed = 0.0;
+        this.Landed = 0;
         this.LandedDate= "";
-        this.LandedQuantity = 0.0;
+        this.LandedQuantity = 0;
         this.Cost= 0.0;
     } 
 
@@ -200,7 +200,7 @@ class C6 extends CTransactions{
         this.DestinationType = DestinationType;
         this.DestinationID = DestinationID;
         this.Amount = 1.0 * Amount;
-        this.Cloths = 1.0 * Cloths;
+        this.Cloths =  Cloths;
        
     }
 
