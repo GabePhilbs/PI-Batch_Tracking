@@ -2,7 +2,7 @@
 
 var ss = SpreadsheetApp.getActiveSpreadsheet();
   //Input Sheets
-  var A0Input = ss.getSheetByName('A0 Other deposits');
+  var A0Input = ss.getSheetByName('A0 Unapplied Payment');
   var A1Input = ss.getSheetByName('A1 Cloth Payment'); 
   var A2Input = ss.getSheetByName('A2 Production payment'); 
   var A3Input = ss.getSheetByName("A3 Shipping Payment"); 
@@ -13,7 +13,7 @@ var ss = SpreadsheetApp.getActiveSpreadsheet();
  
 
  //output sheets
-  var A0Output = ss.getSheetByName('Balances A0 Other Deposits');
+  var A0Output = ss.getSheetByName('Balances A0 Unapplied Payment');
   var A1Output = ss.getSheetByName('Balances A1 Cloth Payment'); 
   var A2Output = ss.getSheetByName('Balances A2 Production payment'); 
   var A3Output = ss.getSheetByName('Balances A3 Shipping Payment'); 
