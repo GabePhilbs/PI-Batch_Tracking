@@ -6,6 +6,7 @@ var ss = SpreadsheetApp.getActiveSpreadsheet();
   var A1Input = ss.getSheetByName('A1 Cloth Payment'); 
   var A2Input = ss.getSheetByName('A2 Production payment'); 
   var A3Input = ss.getSheetByName("A3 Shipping Payment"); 
+  var A8Input = ss.getSheetByName("A8 Customs Payment"); 
   var B4Input = ss.getSheetByName("B4 Refund"); 
   var B5Input = ss.getSheetByName('B5 Batch'); 
   var C6Input = ss.getSheetByName('C6 Transfer');
@@ -17,6 +18,7 @@ var ss = SpreadsheetApp.getActiveSpreadsheet();
   var A1Output = ss.getSheetByName('Balances A1 Cloth Payment'); 
   var A2Output = ss.getSheetByName('Balances A2 Production payment'); 
   var A3Output = ss.getSheetByName('Balances A3 Shipping Payment'); 
+  var A8Output = ss.getSheetByName('Balances A8 Customs Payment'); 
   var B4Output = ss.getSheetByName('Balances B4 Refund'); 
   var B5Output = ss.getSheetByName('Balances B5 Batch'); 
 
@@ -26,6 +28,7 @@ var A0Array =[];
 var A1Array =[];
 var A2Array =[];
 var A3Array =[];
+var A8Array =[];
 var B4Array =[];
 var B5Array =[];
 var C6Array =[];
@@ -70,12 +73,13 @@ class BDestinationAccounts{
         this.ClothPaid = 0.0;
         this.ProductionPaid = 0.0;
         this.ShippingPaid = 0.0;
+        this.CustomsPaid = 0.0;
         this.Balance = 0.0;
         this.Cloths = 0;
       
           }
           UpdateBalance(){
-              this.Balance = this.ClothPaid + this.ProductionPaid + this.ShippingPaid;
+              this.Balance = this.ClothPaid + this.ProductionPaid + this.ShippingPaid + this.CustomsPaid;
           }
           
     
@@ -149,7 +153,13 @@ class A3 extends AsourceAccounts{
     }
 }
 
-
+// A8 customs deposits
+class A8 extends AsourceAccounts{
+    constructor(ID,ExID1,ExID2,Date, Description, InitialBalance, Payee, BankAccount){
+        super(ID,ExID1,ExID2,Date, Description, InitialBalance, Payee, BankAccount)
+        this.Type = 8;
+    }
+}
 
 // B group child classes
 
@@ -218,13 +228,14 @@ class C6 extends CTransactions{
             case 3: targetArray = A3Array; break;
             case 4: targetArray = B4Array; break;
             case 5: targetArray = B5Array; break;
+            case 8: targetArray = A8Array; break;
             default: throw new Error(" error on transaction id " + this.ID + " invalid destination type " + this.DestinationType); break;
 
         }
 
        
 
-        if(this.DestinationGroup == "B"){ //group B will have 3 types of balances
+        if(this.DestinationGroup == "B"){ //group B will have (old 3 types of balances) 4 types of balances
 
             //selecting which balance will increase
             let toIncrease = "";
@@ -232,6 +243,7 @@ class C6 extends CTransactions{
                 case 1: toIncrease = "ClothPaid"; break;
                 case 2: toIncrease =  "ProductionPaid"; break;
                 case 3: toIncrease = "ShippingPaid" ; break;
+                case 8: toIncrease = "CustomsPaid" ; break;
                 default: throw new Error(" error on transaction id " + this.ID + " invalid origin type " + this.OriginType); break;
 
             
@@ -283,6 +295,7 @@ class C6 extends CTransactions{
             case 1: originArray = A1Array; break;
             case 2: originArray = A2Array; break;
             case 3: originArray = A3Array; break;
+            case 8: originArray = A8Array; break;
             default: throw new Error(" error on transaction id " + this.ID + " invalid origin type " + this.OriginType); break;
 
         }
@@ -362,6 +375,10 @@ function mainFunction(){
     importObjects(A2Input,A2Arguments,A2,A2Array);
     let A3Arguments = ["ID","ExID1","ExID2","Date", "Description", "InitialBalance", "Payee", "BankAccount"];
     importObjects(A3Input,A3Arguments,A3,A3Array);
+    //added for customs
+    let A8Arguments = ["ID","ExID1","ExID2","Date", "Description", "InitialBalance", "Payee", "BankAccount"];
+    importObjects(A8Input,A8Arguments,A8,A8Array);
+    //
     let B4Arguments = ["ID","ExID1","ExID2","Date", "Description","BankAccount"];
     importObjects(B4Input,B4Arguments,B4,B4Array);
     let B5Arguments = ["ID","ExID1","ExID2","Date", "Description"];
@@ -387,111 +404,11 @@ function mainFunction(){
     printObjects(A1Array,A1Output);
     printObjects(A2Array,A2Output);
     printObjects(A3Array,A3Output);
+    printObjects(A8Array,A8Output);
     printObjects(B4Array,B4Output);
     printObjects(B5Array,B5Output);
 
 
 
 }
-
-
-
-///---------------------------------------------------------------------------------------
-/////// TESTING STUFF, DELETE EVERYTHING BELOW THIS LINE ON CLEANUP FASE!!!!!!!!!!!!!
-
-
-
-
-
-
-// var batchIDFromSheet = 5000001;
-// var batchIDFromSheet2 = 5000002;
-
-// //var firstBatch = new B5(batchIDFromSheet,"AC105","","12/05/2022","");
-
-
-
-
-
-
-// function testFunction(){
-//   console.log("running test function");
-  
-//     A0Array[0] = new A0(0000001,"","","","",500,"","")
-
-//     A1Array[0] = new A1(1000001,"","","","",1000,"","",500)
-//     A1Array[1] = new A1(1000002,"","","","",2000,"","",1000)
-    
-//     A2Array[0] = new A2(2000001,"","","","",500,"","")
-//     A2Array[1] = new A2(2000002,"","","","",400,"","")
-
-//     A3Array[0] = new A3(3000001,"","","","",400,"","")
-
-//     B4Array[0] = new B4(4000001,"","","","",2200102);
-    
-//     B5Array[0]= new B5(batchIDFromSheet,"AC105","","12/05/2022","");
-//     B5Array[1]= new B5(batchIDFromSheet2,"AC105","","12/05/2023","");
-    
-//     C6Array[0] = new C6(6000001,"","","A",2,2000001,"B",5,5000001,100,0);
-//     C6Array[1] = new C6(6000002,"","","A",1,1000002,"B",5,5000002,500,250);
-//     C6Array[2] = new C6(6000003,"","","A",2,2000002,"B",5,5000002,200,0);
-//     C6Array[3] = new C6(6000004,"","","A",2,2000001,"B",5,5000001,100,0);
-//     C6Array[4] = new C6(6000005,"","","A",0,0000001,"A",2,2000001,100,0);
-
-//     //testing a bogus transaction, moving balance from the "Other deposits" directly to destination
-//     // the correct thing is to first transfer the balance to one of the other origin accounts
-//     //C6Array[5] = new C6(6000006,"","","A",0,0000001,"B",5,5000001,100,0);
-  
-//     C7Array[0]= new C7(7000001,"","5/25/2022",5000002,100);
-  
-    
-//     // console.log(A1Array);
-//     // console.log(A2Array);
-//     // console.log(B5Array);
-//     // console.log(C6Array);
-  
-  
-//     C6Array[0].executeTransfer();
-//     C6Array[1].executeTransfer();
-//     C6Array[2].executeTransfer();
-//     C6Array[3].executeTransfer();
-//     C6Array[4].executeTransfer();
-
-
-//     //bogus transaction for testing, comment out to avoid error
-//     // C6Array[5].executeTransfer();
-
-//     C7Array[0].executeLanding();
-  
-  
-  
-//     console.log(A0Array);
-//     console.log(A1Array);
-//     console.log(A2Array);
-//     console.log(A3Array);
-//     console.log(B4Array);
-//     console.log(B5Array);
-//     console.log(C6Array);
-//     console.log(C7Array);
-
-//     //printObjects(A1Array,A1Output)
-
-
-    
-    
-//   }
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
 
