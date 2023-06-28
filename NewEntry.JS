@@ -27,3 +27,15 @@ function CreatePayment() {
     destinationRange.setValues([newRow]);
   }
   
+
+  function CreateTransfer() {
+    var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var sourceSheet = spreadsheet.getSheetByName("New Entry");
+    var destinationSheetName = sourceSheet.getRange("B21").getValue();
+    var destinationSheet = spreadsheet.getSheetByName(destinationSheetName);
+    
+    var newRow = sourceSheet.getRange("A32:K32").getValues()[0];
+    var destinationRange = destinationSheet.getRange(destinationSheet.getLastRow() + 1, 1, 1, newRow.length);
+    
+    destinationRange.setValues([newRow]);
+  }
